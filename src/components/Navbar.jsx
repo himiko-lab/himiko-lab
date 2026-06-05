@@ -7,7 +7,6 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl bg-white/60 backdrop-blur-md border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] z-50 transition-all duration-300 ${isOpen ? 'rounded-3xl' : 'rounded-full'}`}>
       
-      {/* Bentuk wadah akan otomatis berubah dari bulat (rounded-full) menjadi kotak bersudut tumpul (rounded-3xl) saat menu dibuka */}
       <div className="px-6 py-3 md:py-4">
         <div className="flex justify-between items-center">
           
@@ -52,15 +51,22 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Daftar Tautan Menu Mobile */}
-        {isOpen && (
-          <div className="md:hidden mt-4 pt-4 border-t border-slate-200/50 flex flex-col space-y-4 pb-2 animate-fade-in">
+        {/* Daftar Tautan Menu Mobile (Dengan Animasi Transisi Halus) */}
+        <div 
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen 
+              ? 'max-h-64 opacity-100 mt-4 pt-4 border-t border-slate-200/50' 
+              : 'max-h-0 opacity-0 mt-0 pt-0 border-t-0 border-transparent'
+          }`}
+        >
+          <div className="flex flex-col space-y-4 pb-2">
             <a href="#home" onClick={() => setIsOpen(false)} className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Beranda</a>
             <a href="#about" onClick={() => setIsOpen(false)} className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Tentang</a>
             <a href="#application" onClick={() => setIsOpen(false)} className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Aplikasi</a>
             <a href="#contact" onClick={() => setIsOpen(false)} className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Kontak</a>
           </div>
-        )}
+        </div>
+
       </div>
     </nav>
   );
