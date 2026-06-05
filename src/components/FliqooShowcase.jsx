@@ -26,23 +26,29 @@ const FliqooShowcase = () => {
             </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 pt-2">
+          {/* CTA Buttons - Diubah menjadi format 2-2 */}
+          <div className="flex flex-col gap-4 pt-2 items-center lg:items-start">
             
-            {/* Tombol Baru: Tautan ke Website Fliqoo */}
-            <a href="https://fliqoo.himikolab.my.id" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-md flex items-center justify-center">
-              🌐 Kunjungi Website
-            </a>
+            {/* Baris Pertama: Kunjungi Website & Play Store */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="https://fliqoo.himikolab.my.id" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-md flex items-center justify-center">
+                🌐 Kunjungi Website
+              </a>
+              <button className="px-6 py-3 rounded-full border border-slate-300 bg-white/40 text-slate-700 font-medium hover:bg-white/70 transition-all backdrop-blur-md shadow-sm">
+                ⏳ Segera Hadir di Play Store
+              </button>
+            </div>
+            
+            {/* Baris Kedua: APKPure & Uptodown */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="https://apkpure.com/group/com.himikolab.fliqoo" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors shadow-md flex items-center justify-center">
+                📥 Unduh di APKPure
+              </a>
+              <a href="#" className="px-6 py-3 rounded-full bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors shadow-md flex items-center justify-center">
+                📥 Unduh di Uptodown
+              </a>
+            </div>
 
-            <button className="px-6 py-3 rounded-full border border-slate-300 bg-white/40 text-slate-700 font-medium hover:bg-white/70 transition-all backdrop-blur-md shadow-sm">
-              ⏳ Segera Hadir di Play Store
-            </button>
-            <a href="https://apkpure.com/group/com.himikolab.fliqoo" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors shadow-md flex items-center justify-center">
-              📥 Unduh di APKPure
-            </a>
-            <a href="#" className="px-6 py-3 rounded-full bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors shadow-md flex items-center justify-center">
-              📥 Unduh di Uptodown
-            </a>
           </div>
         </div>
 
