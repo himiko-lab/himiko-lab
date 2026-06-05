@@ -12,8 +12,8 @@ function App() {
       
       <Hero />
       
-      {/* Master layout container for Bento Box widgets */}
-      <main className="max-w-7xl mx-auto px-6 flex flex-col gap-10">
+      {/* Wadah utama diubah dari max-w-7xl menjadi max-w-5xl agar simetris dengan Navbar */}
+      <main className="max-w-5xl mx-auto px-6 flex flex-col gap-10">
         <About />
         <FliqooShowcase />
       </main>
