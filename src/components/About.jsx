@@ -13,7 +13,7 @@ const About = () => {
         <div className="relative z-10 max-w-3xl mx-auto">
           
           {/* Ubah text-left menjadi text-center */}
-          <h2 className="text-3xl font-semibold mb-6 text-center">Tentang Studio</h2>
+          <h2 className="text-3xl font-semibold mb-6 text-center">Tentang Himiko Lab</h2>
           
           <div className="text-slate-300 text-lg md:text-xl font-light leading-relaxed text-justify space-y-4">
             <p>
