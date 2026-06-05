@@ -16,7 +16,7 @@ const FliqooShowcase = () => {
         </div>
 
         {/* Right Side: Content & CTA */}
-        <div className="flex-1 text-center lg:text-left flex flex-col justify-center h-full space-y-6 lg:pt-2">
+        <div className="flex-1 text-center lg:text-left flex flex-col justify-center h-full space-y-6 lg:pt-2 w-full">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
               Fliqoo - Pelacak Keuangan AI
@@ -26,25 +26,25 @@ const FliqooShowcase = () => {
             </p>
           </div>
 
-          {/* CTA Buttons - Diubah menjadi format 2-2 */}
-          <div className="flex flex-col gap-4 pt-2 items-center lg:items-start">
+          {/* CTA Buttons - Dibuat Membentang Penuh (Full Width) */}
+          <div className="flex flex-col gap-4 pt-2 w-full max-w-2xl mx-auto lg:mx-0">
             
-            {/* Baris Pertama: Kunjungi Website & Play Store */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="https://fliqoo.himikolab.my.id" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-md flex items-center justify-center">
+            {/* Baris Pertama */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full">
+              <a href="https://fliqoo.himikolab.my.id" target="_blank" rel="noopener noreferrer" className="flex-1 w-full py-3 px-4 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-md flex items-center justify-center text-sm md:text-base">
                 🌐 Kunjungi Website
               </a>
-              <button className="px-6 py-3 rounded-full border border-slate-300 bg-white/40 text-slate-700 font-medium hover:bg-white/70 transition-all backdrop-blur-md shadow-sm">
+              <button className="flex-1 w-full py-3 px-4 rounded-xl border border-slate-300 bg-white/40 text-slate-700 font-medium hover:bg-white/70 transition-all backdrop-blur-md shadow-sm flex items-center justify-center text-sm md:text-base">
                 ⏳ Segera Hadir di Play Store
               </button>
             </div>
             
-            {/* Baris Kedua: APKPure & Uptodown */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="https://apkpure.com/group/com.himikolab.fliqoo" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors shadow-md flex items-center justify-center">
+            {/* Baris Kedua */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full">
+              <a href="https://apkpure.com/group/com.himikolab.fliqoo" target="_blank" rel="noopener noreferrer" className="flex-1 w-full py-3 px-4 rounded-xl bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors shadow-md flex items-center justify-center text-sm md:text-base">
                 📥 Unduh di APKPure
               </a>
-              <a href="#" className="px-6 py-3 rounded-full bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors shadow-md flex items-center justify-center">
+              <a href="#" className="flex-1 w-full py-3 px-4 rounded-xl bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors shadow-md flex items-center justify-center text-sm md:text-base">
                 📥 Unduh di Uptodown
               </a>
             </div>
