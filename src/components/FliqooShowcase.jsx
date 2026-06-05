@@ -19,7 +19,7 @@ const FliqooShowcase = () => {
         <div className="flex-1 text-center lg:text-left flex flex-col justify-center h-full space-y-6 lg:pt-2 w-full">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
-              Fliqoo - Pelacak Keuangan AI
+              Fliqoo - Catatan Keuangan AI
             </h2>
             <p className="text-lg text-slate-600 font-light leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Ambil kendali penuh atas kesehatan finansial Anda melalui penganggaran cerdas dan asisten AI yang terintegrasi.
