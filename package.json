@@ -1,7 +1,7 @@
 {
   "name": "website-himiko-lab",
   "version": "1.0.0",
-  "description": "",
+  "description": "Studio aplikasi dan perangkat digital harian yang minimalis dan modern.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,8 +9,15 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "himiko lab",
+    "portfolio",
+    "react",
+    "vite",
+    "tailwind",
+    "fliqoo"
+  ],
+  "author": "Himiko Lab",
   "license": "ISC",
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.0",
@@ -19,5 +26,9 @@
     "postcss": "^8.5.15",
     "tailwindcss": "^4.3.0",
     "vite": "^8.0.16"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   }
 }
