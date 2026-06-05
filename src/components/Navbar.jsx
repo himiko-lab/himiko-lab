@@ -11,7 +11,7 @@ const Navbar = () => {
             <a href="#home" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
               <img 
                 src={himikoLogo} 
-                alt="Himiko Lab Logo" 
+                alt="Logo Himiko Lab" 
                 className="h-8 w-auto"
               />
               <span className="text-xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: "'Poppins', sans-serif" }}>
@@ -22,10 +22,10 @@ const Navbar = () => {
           
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Home</a>
-            <a href="#about" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">About</a>
-            <a href="#application" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Application</a>
-            <a href="#contact" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
+            <a href="#home" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Beranda</a>
+            <a href="#about" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Tentang</a>
+            <a href="#application" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Aplikasi</a>
+            <a href="#contact" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Kontak</a>
           </div>
 
           {/* Mobile Menu Button */}
