@@ -5,7 +5,7 @@ Studio aplikasi dan perangkat digital harian yang minimalis dan modern.
 [![Live Demo](https://img.shields.io/badge/Live_Demo-himikolab.my.id-blue?style=for-the-badge)](https://himikolab.my.id/)
 
 ## 📝 Tentang
-Repositori ini berisi *source code* resmi untuk situs web **Himiko Lab**. Kami percaya bahwa teknologi seharusnya memberikan ketenangan, bukan kerumitan. Kami berfokus pada perancangan aplikasi harian dengan desain intuitif, termasuk produk unggulan kami: **Fliqoo - Pelacak Keuangan AI**.
+Repositori ini berisi *source code* resmi untuk situs web **Himiko Lab**. Kami percaya bahwa teknologi seharusnya memberikan ketenangan, bukan kerumitan. Kami berfokus pada perancangan aplikasi harian dengan desain intuitif, termasuk produk unggulan kami: **Fliqoo - Catatan Keuangan AI**.
 
 ## 🛠️ Teknologi yang Digunakan
 Proyek ini dibangun dengan standar teknologi *front-end* modern:
