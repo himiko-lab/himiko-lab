@@ -5,8 +5,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    {/* Perhatikan perubahan di bagian paling belakang: rounded-2xl dan rounded-[3rem] serta penambahan ease-in-out */}
-    <nav className={`fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl bg-white/60 backdrop-blur-md border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] z-50 transition-all duration-300 ease-in-out ${isOpen ? 'rounded-2xl' : 'rounded-[3rem]'}`}>
+    <nav className={`fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl bg-white/60 backdrop-blur-md border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] z-50 transition-all duration-200 ease-in-out ${isOpen ? 'rounded-2xl' : 'rounded-[3rem]'}`}>
       
       <div className="px-6 py-3 md:py-4">
         <div className="flex justify-between items-center">
@@ -41,10 +40,8 @@ const Navbar = () => {
             >
               <svg className="h-6 w-6 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isOpen ? (
-                  // Ikon Silang (X)
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
-                  // Ikon Garis 3
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 )}
               </svg>
@@ -52,9 +49,9 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Daftar Tautan Menu Mobile (Dengan Animasi Transisi Halus) */}
+        {/* Daftar Tautan Menu Mobile */}
         <div 
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`md:hidden overflow-hidden transition-all duration-200 ease-in-out ${
             isOpen 
               ? 'max-h-64 opacity-100 mt-4 pt-4 border-t border-slate-200/50' 
               : 'max-h-0 opacity-0 mt-0 pt-0 border-t-0 border-transparent'
