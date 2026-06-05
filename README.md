@@ -19,4 +19,4 @@ Jika Anda ingin mengunduh dan menjalankan proyek ini di komputer Anda:
 
 1. **Clone repositori ini**
    ```bash
-   git clone [https://github.com/himiko-lab/himiko-lab.git](https://github.com/himiko-lab/himiko-lab.git)
+   git clone https://github.com/himiko-lab/himiko-lab.git
