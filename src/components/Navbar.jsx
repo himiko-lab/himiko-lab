@@ -5,7 +5,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className={`fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl bg-white/60 backdrop-blur-md border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] z-50 transition-all duration-300 ${isOpen ? 'rounded-3xl' : 'rounded-full'}`}>
+    {/* Perhatikan perubahan di bagian paling belakang: rounded-2xl dan rounded-[3rem] serta penambahan ease-in-out */}
+    <nav className={`fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl bg-white/60 backdrop-blur-md border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] z-50 transition-all duration-300 ease-in-out ${isOpen ? 'rounded-2xl' : 'rounded-[3rem]'}`}>
       
       <div className="px-6 py-3 md:py-4">
         <div className="flex justify-between items-center">
