@@ -28,6 +28,12 @@ const FliqooShowcase = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 pt-2">
+            
+            {/* Tombol Baru: Tautan ke Website Fliqoo */}
+            <a href="https://fliqoo.himikolab.my.id" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-md flex items-center justify-center">
+              🌐 Kunjungi Website
+            </a>
+
             <button className="px-6 py-3 rounded-full border border-slate-300 bg-white/40 text-slate-700 font-medium hover:bg-white/70 transition-all backdrop-blur-md shadow-sm">
               ⏳ Segera Hadir di Play Store
             </button>
