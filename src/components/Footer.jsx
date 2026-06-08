@@ -1,5 +1,6 @@
 import React from 'react';
 import instagramIcon from '../assets/images/instagram.png';
+import emailIcon from '../assets/images/email-icon.png';
 
 const Footer = () => {
   return (
@@ -11,7 +12,7 @@ const Footer = () => {
         
         <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 text-lg text-slate-600 font-medium">
           <a href="mailto:labhimiko@gmail.com" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <img src={emailIcon} alt="Email" className="w-6 h-6" />
             labhimiko@gmail.com
           </a>
           
@@ -19,7 +20,7 @@ const Footer = () => {
           
           <a href="#" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
             <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
-            @menyusul (Segera Hadir)
+            @himiko.lab
           </a>
         </div>
         
