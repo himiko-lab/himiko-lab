@@ -1,4 +1,5 @@
 import React from 'react';
+import InstagramIcon from '../assets/images/instagram-gray.png?react';
 
 const Footer = () => {
   return (
@@ -17,7 +18,7 @@ const Footer = () => {
           <span className="hidden md:block text-slate-300">|</span>
           
           <a href="#" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            <InstagramIcon className="w-6 h-6" />
             @menyusul (Segera Hadir)
           </a>
         </div>
