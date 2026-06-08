@@ -1,5 +1,5 @@
 import React from 'react';
-import instagramIcon from '../assets/images/instagram-gray.png';
+import instagramIcon from '../assets/images/instagram.png';
 
 const Footer = () => {
   return (
