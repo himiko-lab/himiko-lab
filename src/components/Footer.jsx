@@ -1,5 +1,5 @@
 import React from 'react';
-import InstagramIcon from '../assets/images/instagram-gray.png;
+import instagramIcon from '../assets/images/instagram-gray.png';
 
 const Footer = () => {
   return (
@@ -18,7 +18,7 @@ const Footer = () => {
           <span className="hidden md:block text-slate-300">|</span>
           
           <a href="#" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
-            <InstagramIcon className="w-6 h-6" />
+            <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
             @menyusul (Segera Hadir)
           </a>
         </div>
