@@ -18,7 +18,7 @@ const Footer = () => {
           
           <span className="hidden md:block text-slate-300">|</span>
           
-          <a href="#" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
+          <a href="https://instagram.com/himiko.lab" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
             <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
             @himiko.lab
           </a>
