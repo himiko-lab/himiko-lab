@@ -12,9 +12,9 @@ const Footer = () => {
         </h2>
 
         <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 text-lg text-slate-600 font-medium">
-          <a href="mailto:labhimiko@gmail.com" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
+          <a href="mailto:hi@himikolab.my.id" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
             <img src={emailIcon} alt="Email" className="w-6 h-6" />
-            labhimiko@gmail.com
+            hi@himikolab.my.id
           </a>
 
           <span className="hidden md:block text-slate-300">|</span>
