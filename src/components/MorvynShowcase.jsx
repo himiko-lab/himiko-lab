@@ -66,8 +66,6 @@ export default function MorvynShowcase() {
                   {t.morvyn.ctaDownload}
                 </Button>
               </div>
-
-              <p className="mt-3 text-xs text-slate-500">{t.morvyn.statusNote}</p>
             </div>
 
             {/* Fitur */}

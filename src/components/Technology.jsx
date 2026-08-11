@@ -1,12 +1,8 @@
 import React from 'react';
-import { Chip } from '@heroui/react/chip';
 import { Compass, RocketLaunch, PenNib } from '@phosphor-icons/react';
 import { useT } from '../i18n';
 
 const STEP_ICONS = [Compass, RocketLaunch, PenNib];
-
-// Teknologi yang benar-benar dipakai membangun situs ini.
-const STACK = ['React', 'Vite', 'Tailwind CSS', 'HeroUI', 'Phosphor Icons'];
 
 export default function Technology() {
   const { t } = useT();
@@ -43,19 +39,6 @@ export default function Technology() {
               </div>
             );
           })}
-        </div>
-
-        <div className="mt-8 flex flex-col items-center gap-3">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-            {t.tech.stackLabel}
-          </span>
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {STACK.map((item) => (
-              <Chip key={item} variant="soft" color="accent" size="sm">
-                {item}
-              </Chip>
-            ))}
-          </div>
         </div>
       </div>
     </section>

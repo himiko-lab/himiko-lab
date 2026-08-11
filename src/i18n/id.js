@@ -102,7 +102,6 @@ export default {
     ],
     ctaWebsite: 'Kunjungi Website Morvyn',
     ctaDownload: 'Segera hadir',
-    statusNote: 'Tautan unduhan sedang disiapkan.',
   },
 
   tech: {
@@ -123,7 +122,6 @@ export default {
         body: 'Kami pakai sendiri setiap hari, mendengarkan masukan, lalu memangkas apa yang ternyata tidak terpakai.',
       },
     ],
-    stackLabel: 'Dibangun dengan',
   },
 
   footer: {

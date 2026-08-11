@@ -102,7 +102,6 @@ export default {
     ],
     ctaWebsite: 'Visit the Morvyn website',
     ctaDownload: 'Coming soon',
-    statusNote: 'Download links are being prepared.',
   },
 
   tech: {
@@ -123,7 +122,6 @@ export default {
         body: 'We use it ourselves daily, listen to feedback, then cut whatever turns out to go unused.',
       },
     ],
-    stackLabel: 'Built with',
   },
 
   footer: {
