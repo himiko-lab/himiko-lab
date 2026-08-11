@@ -13,3 +13,6 @@ dist/
 # Local env
 .env
 .env.local
+
+# Tooling lokal
+.claude/
