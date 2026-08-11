@@ -1,43 +1,76 @@
 import React from 'react';
-import instagramIcon from '../assets/images/instagram.png';
-import emailIcon from '../assets/images/email-icon.png';
-import tiktokIcon from '../assets/images/tiktok.png';
+import {
+  InstagramLogo,
+  TiktokLogo,
+  PinterestLogo,
+  EnvelopeSimple,
+  ArrowUpRight,
+} from '@phosphor-icons/react';
+import himikoLogo from '../assets/images/himiko-logo.svg';
+import { SOCIAL } from '../data/links';
+import { useT } from '../i18n';
 
-const Footer = () => {
+const CHANNELS = [
+  { key: 'instagram', label: 'Instagram', Icon: InstagramLogo, external: true },
+  { key: 'tiktok', label: 'TikTok', Icon: TiktokLogo, external: true },
+  { key: 'pinterest', label: 'Pinterest', Icon: PinterestLogo, external: true },
+  { key: 'email', label: 'Email', Icon: EnvelopeSimple, external: false },
+];
+
+export default function Footer() {
+  const { t } = useT();
+
   return (
-    <footer id="contact" className="mt-20 py-10 bg-white/30 backdrop-blur-md border-t border-white/50">
-      <div className="max-w-4xl mx-auto text-center space-y-8 px-6">
-        <h2 className="text-3xl font-semibold text-slate-800 tracking-tight">
-          Mari ciptakan sesuatu yang nyaman bersama-sama.
-        </h2>
+    <footer id="contact" className="scroll-mt-28 px-6 pb-10 pt-16 sm:pt-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="glass-card rounded-[2rem] p-8 text-center sm:p-12">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            {t.footer.title}
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-slate-600">
+            {t.footer.subtitle}
+          </p>
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 text-lg text-slate-600 font-medium">
-          <a href="mailto:hi@himikolab.my.id" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
-            <img src={emailIcon} alt="Email" className="w-6 h-6" />
-            hi@himikolab.my.id
-          </a>
-
-          <span className="hidden md:block text-slate-300">|</span>
-
-          <a href="https://instagram.com/himiko.lab" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
-            <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
-            @himiko.lab
-          </a>
-
-          <span className="hidden md:block text-slate-300">|</span>
-
-          <a href="https://tiktok.com/@himiko.lab" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-blue-600 transition-colors p-2 rounded-xl hover:bg-white/40">
-            <img src={tiktokIcon} alt="TikTok" className="w-6 h-6" />
-            @himiko.lab
-          </a>
+          <h3 className="sr-only">{t.footer.socialLabel}</h3>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {CHANNELS.map(({ key, label, Icon, external }) => {
+              const channel = SOCIAL[key];
+              return (
+                <a
+                  key={key}
+                  href={channel.href}
+                  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="lift group flex items-center gap-3 rounded-2xl border border-brand-500/10 bg-white/70 p-4 text-left transition-colors hover:border-brand-500/25"
+                >
+                  <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-500 group-hover:text-white">
+                    <Icon size={20} weight="duotone" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-xs font-medium text-slate-400">{label}</span>
+                    <span className="block truncate text-sm font-semibold text-ink">
+                      {channel.handle}
+                    </span>
+                  </span>
+                  <ArrowUpRight
+                    size={15}
+                    weight="bold"
+                    aria-hidden="true"
+                    className="ml-auto flex-shrink-0 text-slate-300 transition-colors group-hover:text-brand-500"
+                  />
+                </a>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-200/50 text-slate-500 text-sm font-medium">
-          &copy; 2026 Himiko Lab. Hak cipta dilindungi undang-undang.
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <div className="flex items-center gap-2.5">
+            <img src={himikoLogo} alt="" className="h-6 w-auto" />
+            <span className="font-display text-sm font-semibold text-ink">Himiko Lab</span>
+          </div>
+          <p className="text-xs text-slate-500">{t.footer.copyright}</p>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

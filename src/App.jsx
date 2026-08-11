@@ -1,26 +1,28 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Principles from './components/Principles';
 import About from './components/About';
-import FliqooShowcase from './components/FliqooShowcase';
+import LogoMeaning from './components/LogoMeaning';
+import MorvynShowcase from './components/MorvynShowcase';
+import Technology from './components/Technology';
 import Footer from './components/Footer';
 
-function App() {
+export default function App() {
   return (
-    <div className="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen font-sans">
+    <div className="min-h-screen overflow-x-hidden">
       <Navbar />
-      
       <Hero />
-      
-      {/* Wadah utama diubah dari max-w-7xl menjadi max-w-5xl agar simetris dengan Navbar */}
-      <main className="max-w-5xl mx-auto px-6 flex flex-col gap-10">
+
+      <main className="flex flex-col gap-16 sm:gap-24">
+        <Principles />
         <About />
-        <FliqooShowcase />
+        <LogoMeaning />
+        <MorvynShowcase />
+        <Technology />
       </main>
-      
+
       <Footer />
     </div>
   );
 }
-
-export default App;

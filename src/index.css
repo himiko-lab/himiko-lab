@@ -1,27 +1,129 @@
+@layer theme, base, components, utilities;
+
+/* Urutan wajib: tailwindcss selalu lebih dulu, baru @heroui/styles. */
 @import "tailwindcss";
+@import "@heroui/styles";
+
+/* Font di-host sendiri, tanpa permintaan ke Google Fonts. */
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource/poppins/latin-500.css";
+@import "@fontsource/poppins/latin-600.css";
+@import "@fontsource/poppins/latin-700.css";
 
 @theme {
-  --font-sans: 'Inter', sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  /* Tangga biru merek, diturunkan dari #1063F8 pada logo. */
+  --color-brand-50: oklch(0.9714 0.0142 258.32);
+  --color-brand-100: oklch(0.9376 0.0322 258.86);
+  --color-brand-200: oklch(0.8853 0.0621 259.87);
+  --color-brand-300: oklch(0.8106 0.1073 260.6);
+  --color-brand-400: oklch(0.7018 0.1732 261.05);
+  --color-brand-500: oklch(0.5532 0.2345 261.58);
+  --color-brand-600: oklch(0.5013 0.2262 261.79);
+  --color-brand-700: oklch(0.4285 0.1934 262.1);
+  --color-brand-800: oklch(0.3571 0.1583 262.44);
+  --color-brand-900: oklch(0.2894 0.1235 262.86);
+  --color-brand-950: oklch(0.2049 0.0854 263.4);
+
+  --color-ink: oklch(0.2077 0.0398 265.75);
+}
+
+/*
+ * HeroUI menurunkan seluruh varian (hover, soft, focus ring) dari --accent lewat
+ * color-mix, jadi cukup timpa satu variabel ini untuk mengubah warna merek
+ * di seluruh komponennya. Jangan deklarasi ulang @theme untuk --color-accent:
+ * @heroui/styles sudah menjembatani token itu ke Tailwind.
+ */
+:root,
+[data-theme="light"] {
+  --accent: oklch(0.5532 0.2345 261.58); /* #1063F8 */
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(58rem 34rem at 12% -8%, oklch(0.9376 0.0322 258.86 / 0.85), transparent 60%),
+    radial-gradient(46rem 30rem at 92% 2%, oklch(0.9 0.055 285 / 0.7), transparent 55%),
+    radial-gradient(52rem 40rem at 78% 96%, oklch(0.93 0.04 262 / 0.6), transparent 60%),
+    linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.985 0.006 258) 42%, oklch(0.962 0.018 262) 100%);
+  background-attachment: fixed;
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
 }
 
-/* Custom Glassmorphism Utilities */
-.glass-panel {
-  background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+@layer components {
+  /* Kartu kaca terang pengganti CSS dari kartu melayang pada referensi. */
+  .glass-card {
+    background-color: color-mix(in oklab, white 66%, transparent);
+    backdrop-filter: blur(22px) saturate(1.5);
+    -webkit-backdrop-filter: blur(22px) saturate(1.5);
+    border: 1px solid color-mix(in oklab, white 72%, transparent);
+    box-shadow:
+      0 1px 2px oklch(0.28 0.08 263 / 0.04),
+      0 12px 32px -12px oklch(0.28 0.08 263 / 0.14);
+  }
+
+  /* Panel gelap beraksen irama terang/gelap seperti pada referensi. */
+  .glass-panel-dark {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(150deg, oklch(0.2894 0.1235 262.86) 0%, oklch(0.2049 0.0854 263.4) 55%, oklch(0.18 0.05 275) 100%);
+    border: 1px solid oklch(1 0 0 / 0.1);
+    box-shadow: 0 24px 60px -24px oklch(0.2049 0.0854 263.4 / 0.55);
+  }
+
+  .hairline {
+    border: 1px solid color-mix(in oklab, var(--color-brand-500) 12%, transparent);
+  }
+
+  .lift {
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .lift:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 2px 4px oklch(0.28 0.08 263 / 0.05),
+      0 22px 44px -18px oklch(0.28 0.08 263 / 0.24);
+  }
 }
 
-.hover-lift {
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--drift-rotate, 0deg));
+  }
+  50% {
+    transform: translate3d(0, var(--drift-y, -14px), 0) rotate(var(--drift-rotate-alt, 0deg));
+  }
 }
 
-.hover-lift:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+.animate-drift {
+  animation: drift var(--drift-duration, 9s) ease-in-out infinite;
+  animation-delay: var(--drift-delay, 0s);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift {
+    animation: none;
+  }
+
+  .lift:hover {
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }

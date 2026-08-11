@@ -1,73 +1,102 @@
 import React, { useState } from 'react';
+import { List, X, ArrowRight } from '@phosphor-icons/react';
 import himikoLogo from '../assets/images/himiko-logo.svg';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useT } from '../i18n';
 
-const Navbar = () => {
+/*
+ * Komponen Navbar dihapus di HeroUI v3. Panduan resminya menyarankan menyusun
+ * navigasi dari elemen HTML biasa dengan Tailwind, jadi itu yang dilakukan di sini.
+ */
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useT();
+
+  const links = [
+    { href: '#home', label: t.nav.home },
+    { href: '#about', label: t.nav.about },
+    { href: '#logo', label: t.nav.logo },
+    { href: '#morvyn', label: t.nav.morvyn },
+    { href: '#contact', label: t.nav.contact },
+  ];
 
   return (
-    <nav className={`fixed top-6 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl bg-white/60 backdrop-blur-md border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] z-50 transition-all duration-200 ease-in-out ${isOpen ? 'rounded-2xl' : 'rounded-[3rem]'}`}>
-      
-      <div className="px-6 py-3 md:py-4">
-        <div className="flex justify-between items-center">
-          
-          {/* Logo & Brand Name */}
-          <div className="flex-shrink-0">
-            <a href="#home" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <img 
-                src={himikoLogo} 
-                alt="Logo Himiko Lab" 
-                className="h-8 w-auto"
-              />
-              <span className="text-xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: "'Poppins', sans-serif" }}>
-                Himiko Lab
-              </span>
-            </a>
-          </div>
-          
-          {/* Menu Desktop (Sembunyi di HP) */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Beranda</a>
-            <a href="#about" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Tentang</a>
-            <a href="#application" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Aplikasi</a>
-            <a href="#contact" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Kontak</a>
+    <nav
+      className={`fixed left-1/2 top-4 z-50 w-[94%] max-w-6xl -translate-x-1/2 border border-white/60 bg-white/70 backdrop-blur-xl transition-[border-radius] duration-200 sm:top-6 ${
+        isOpen ? 'rounded-3xl' : 'rounded-full'
+      }`}
+      style={{ boxShadow: '0 10px 34px -14px rgba(29,45,105,0.18)' }}
+    >
+      <div className="px-4 py-2.5 sm:px-6 sm:py-3">
+        <div className="flex items-center justify-between gap-4">
+          <a
+            href="#home"
+            className="flex flex-shrink-0 items-center gap-2.5 rounded-full transition-opacity hover:opacity-75"
+          >
+            <img src={himikoLogo} alt="Logo Himiko Lab" className="h-8 w-auto" />
+            <span className="font-display text-lg font-bold tracking-tight text-ink sm:text-xl">
+              Himiko Lab
+            </span>
+          </a>
+
+          <div className="hidden items-center gap-7 lg:flex">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-slate-600 transition-colors hover:text-brand-600"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
-          {/* Tombol Menu Mobile (Hamburger / X) */}
-          <div className="md:hidden flex items-center">
-            <button 
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-600 hover:text-blue-600 focus:outline-none p-2"
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher className="hidden sm:inline-flex" />
+
+            <a
+              href="#morvyn"
+              className="hidden items-center gap-1.5 rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-600 lg:inline-flex"
             >
-              <svg className="h-6 w-6 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {isOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+              {t.morvyn.name}
+              <ArrowRight size={15} weight="bold" aria-hidden="true" />
+            </a>
+
+            <button
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-label={isOpen ? t.nav.closeMenu : t.nav.openMenu}
+              className="rounded-full p-2 text-slate-600 transition-colors hover:bg-white hover:text-brand-600 lg:hidden"
+            >
+              {isOpen ? <X size={22} weight="bold" /> : <List size={22} weight="bold" />}
             </button>
           </div>
         </div>
 
-        {/* Daftar Tautan Menu Mobile */}
-        <div 
-          className={`md:hidden overflow-hidden transition-all duration-200 ease-in-out ${
-            isOpen 
-              ? 'max-h-64 opacity-100 mt-4 pt-4 border-t border-slate-200/50' 
-              : 'max-h-0 opacity-0 mt-0 pt-0 border-t-0 border-transparent'
+        <div
+          className={`overflow-hidden transition-all duration-200 ease-in-out lg:hidden ${
+            isOpen ? 'mt-3 max-h-96 border-t border-slate-200/60 pt-3 opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="flex flex-col space-y-4 pb-2">
-            <a href="#home" onClick={() => setIsOpen(false)} className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Beranda</a>
-            <a href="#about" onClick={() => setIsOpen(false)} className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Tentang</a>
-            <a href="#application" onClick={() => setIsOpen(false)} className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Aplikasi</a>
-            <a href="#contact" onClick={() => setIsOpen(false)} className="text-slate-700 hover:text-blue-600 font-medium transition-colors">Kontak</a>
+          <div className="flex flex-col gap-1 pb-1">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="rounded-xl px-3 py-2.5 text-base font-medium text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-600"
+              >
+                {link.label}
+              </a>
+            ))}
+
+            <div className="mt-2 flex items-center gap-2 px-1 sm:hidden">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
-
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}

@@ -1,33 +1,32 @@
 import React from 'react';
+import { useT } from '../i18n';
 
-const About = () => {
+export default function About() {
+  const { t } = useT();
+
   return (
-    <div className="px-6 w-full mx-auto pb-12" id="about">
-      <div className="bg-slate-900/80 backdrop-blur-xl border border-white/20 shadow-2xl rounded-[2.5rem] p-10 md:p-14 text-white overflow-hidden relative">
-        
-        {/* Subtle radial gradient blobs */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-purple-700/40 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-blue-700/30 rounded-full blur-[100px] pointer-events-none"></div>
+    <section id="about" className="scroll-mt-28 px-6">
+      <div className="mx-auto max-w-6xl">
+        <div className="glass-panel-dark rounded-[2rem] p-8 sm:p-12 lg:p-16">
+          <div className="absolute -left-24 -top-24 h-80 w-80 rounded-full bg-brand-500/25 blur-[90px]" />
+          <div className="absolute -bottom-28 -right-20 h-80 w-80 rounded-full bg-violet-500/20 blur-[90px]" />
 
-        {/* Tambahkan mx-auto di div ini untuk mendorongnya ke tengah */}
-        <div className="relative z-10 max-w-3xl mx-auto">
-          
-          {/* Ubah text-left menjadi text-center */}
-          <h2 className="text-3xl font-semibold mb-6 text-center">Tentang Himiko Lab</h2>
-          
-          <div className="text-slate-300 text-lg md:text-xl font-light leading-relaxed text-justify space-y-4">
-            <p>
-              Kami percaya bahwa teknologi seharusnya memberikan ketenangan, bukan kerumitan. Misi kami adalah mengembangkan aplikasi harian dengan desain intuitif yang menyatu dengan sempurna ke dalam hidup Anda. 
-            </p>
-            <p>
-              Di Himiko Lab, kami memadukan logika yang sistematis dengan estetika minimalis. Mulai dari manajemen produktivitas hingga perangkat pelacakan cerdas, setiap sistem yang kami bangun didedikasikan untuk mengotomatiskan hal-hal rumit di balik layar. Kami merancang kesederhanaan agar Anda memiliki lebih banyak waktu dan ruang untuk fokus pada hal-hal yang benar-benar bermakna.
-            </p>
+          <div className="relative mx-auto max-w-3xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-300">
+              {t.about.eyebrow}
+            </span>
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white text-balance sm:text-4xl">
+              {t.about.title}
+            </h2>
+
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-300 sm:text-lg">
+              {t.about.paragraphs.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+            </div>
           </div>
-          
         </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default About;
+}
