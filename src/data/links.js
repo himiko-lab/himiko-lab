@@ -13,6 +13,10 @@ export const SOCIAL = {
     href: 'https://id.pinterest.com/labhimiko/',
     handle: 'labhimiko',
   },
+  youtube: {
+    href: 'https://www.youtube.com/@HimikoLab',
+    handle: '@HimikoLab',
+  },
   email: {
     href: 'mailto:hi@himikolab.my.id',
     handle: 'hi@himikolab.my.id',

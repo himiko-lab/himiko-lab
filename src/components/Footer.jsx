@@ -2,6 +2,7 @@ import React from 'react';
 import {
   InstagramLogo,
   TiktokLogo,
+  YoutubeLogo,
   PinterestLogo,
   EnvelopeSimple,
   ArrowUpRight,
@@ -13,6 +14,7 @@ import { useT } from '../i18n';
 const CHANNELS = [
   { key: 'instagram', label: 'Instagram', Icon: InstagramLogo, external: true },
   { key: 'tiktok', label: 'TikTok', Icon: TiktokLogo, external: true },
+  { key: 'youtube', label: 'YouTube', Icon: YoutubeLogo, external: true },
   { key: 'pinterest', label: 'Pinterest', Icon: PinterestLogo, external: true },
   { key: 'email', label: 'Email', Icon: EnvelopeSimple, external: false },
 ];
@@ -32,6 +34,12 @@ export default function Footer() {
           </p>
 
           <h3 className="sr-only">{t.footer.socialLabel}</h3>
+          {/*
+            Lima kartu sebaris membuat semuanya terpotong, jadi empat akun sosial
+            mengisi satu baris penuh dan kartu email turun ke bawahnya dengan lebar
+            ganda serta digeser satu kolom agar terpusat. Alamat email paling
+            panjang di antara semuanya dan tidak boleh terpotong.
+          */}
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {CHANNELS.map(({ key, label, Icon, external }) => {
               const channel = SOCIAL[key];
@@ -40,7 +48,9 @@ export default function Footer() {
                   key={key}
                   href={channel.href}
                   {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="lift group flex items-center gap-3 rounded-2xl border border-brand-500/10 bg-white/70 p-4 text-left transition-colors hover:border-brand-500/25"
+                  className={`lift group flex items-center gap-3 rounded-2xl border border-brand-500/10 bg-white/70 p-4 text-left transition-colors hover:border-brand-500/25 ${
+                    key === 'email' ? 'sm:col-span-2 lg:col-start-2' : ''
+                  }`}
                 >
                   <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-500 group-hover:text-white">
                     <Icon size={20} weight="duotone" aria-hidden="true" />
