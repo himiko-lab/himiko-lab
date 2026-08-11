@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import himikoLogo from '../assets/images/himiko-logo.png';
+import himikoLogo from '../assets/images/himiko-logo.svg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
