@@ -9,12 +9,25 @@ export const SOCIAL = {
     href: 'https://tiktok.com/@himiko.lab',
     handle: '@himiko.lab',
   },
+  threads: {
+    href: 'https://www.threads.com/@himiko.lab',
+    handle: '@himiko.lab',
+  },
   pinterest: {
     href: 'https://id.pinterest.com/labhimiko/',
     handle: 'labhimiko',
   },
   youtube: {
     href: 'https://www.youtube.com/@HimikoLab',
+    handle: '@HimikoLab',
+  },
+  facebook: {
+    // Halaman belum punya nama pengguna, jadi tautannya memakai id profil.
+    href: 'https://www.facebook.com/profile.php?id=61593282388390',
+    handle: 'Himiko Lab',
+  },
+  x: {
+    href: 'https://x.com/HimikoLab',
     handle: '@HimikoLab',
   },
   email: {
