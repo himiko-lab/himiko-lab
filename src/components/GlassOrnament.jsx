@@ -1,5 +1,6 @@
 import React from 'react';
 import himikoLogo from '../assets/images/himiko-logo.svg';
+import morvynLogo from '../assets/images/morvyn-logo.svg';
 
 /**
  * Gugus objek kaca melayang, padanan CSS untuk render 3D pada referensi desain.
@@ -67,9 +68,12 @@ export default function GlassOrnament() {
         className="right-[6%] top-[4%] h-20 w-20 sm:h-24 sm:w-24"
         style={{ '--drift-y': '-20px', '--drift-duration': '10.5s', '--drift-delay': '0.9s', '--drift-rotate': '7deg', '--drift-rotate-alt': '3deg' }}
       >
-        <div className="flex h-full items-center justify-center">
-          <span className="h-8 w-8 rounded-[0.6rem] bg-gradient-to-br from-amber-300 to-orange-400 shadow-sm" />
-        </div>
+        {/* Berkas logo membawa latar putihnya sendiri, jadi ia mengisi penuh
+            ubin dan dipotong mengikuti lengkungnya agar terbaca sebagai ikon
+            aplikasi, sepadan dengan ubin berlogo Himiko. */}
+        <span className="absolute inset-0 overflow-hidden rounded-[1.75rem]">
+          <img src={morvynLogo} alt="" className="h-full w-full" />
+        </span>
       </GlassTile>
 
       <GlassTile
