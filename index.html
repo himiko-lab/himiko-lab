@@ -1,6 +1,23 @@
 <!doctype html>
 <html lang="id" class="scroll-smooth">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1063F8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta name="p:domain_verify" content="3597aa03d4b201fdcb20e9c6cf18947a"/>
+
+    <!--seo:start-->
+    <!--
+      Seluruh blok ini diganti scripts/prerender.js untuk tiap halaman: judul,
+      deskripsi, canonical, hreflang, Open Graph, dan data terstruktur.
+      Sumbernya src/seo.js dan src/routes.js, jangan diisi di sini.
+      Judul di bawah hanya terlihat saat dev server.
+    -->
+    <title>Himiko Lab</title>
+    <!--seo:end-->
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-675ZRJ7CDZ"></script>
     <script>
@@ -10,78 +27,8 @@
 
       gtag('config', 'G-675ZRJ7CDZ');
     </script>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1063F8" />
-
-    <title>Himiko Lab - Studio Aplikasi Digital</title>
-    <meta name="description" content="Himiko Lab membangun aplikasi harian yang membantu keseharian Anda: mencatat, mengatur waktu, mengelola keuangan, dan menjaga kebiasaan baik." />
-    <meta name="keywords" content="himiko lab, studio aplikasi, morvyn, aplikasi harian, produktivitas" />
-    <meta name="author" content="Himiko Lab" />
-    <meta name="robots" content="index, follow" />
-    <meta name="p:domain_verify" content="3597aa03d4b201fdcb20e9c6cf18947a"/>
-
-    <link rel="canonical" href="https://himikolab.my.id/" />
-    <link rel="alternate" hreflang="id" href="https://himikolab.my.id/" />
-    <link rel="alternate" hreflang="en" href="https://himikolab.my.id/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://himikolab.my.id/" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://himikolab.my.id/" />
-    <meta property="og:locale" content="id_ID" />
-    <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:site_name" content="Himiko Lab" />
-    <meta property="og:title" content="Himiko Lab - Studio Aplikasi Digital" />
-    <meta property="og:description" content="Studio aplikasi digital yang membangun perangkat harian minimalis dan modern." />
-    <meta property="og:image" content="https://himikolab.my.id/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Logo dan nama Himiko Lab" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Himiko Lab - Studio Aplikasi Digital" />
-    <meta name="twitter:description" content="Studio aplikasi digital yang membangun perangkat harian minimalis dan modern." />
-    <meta name="twitter:image" content="https://himikolab.my.id/og-image.png" />
-    <meta name="twitter:image:alt" content="Logo dan nama Himiko Lab" />
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://himikolab.my.id/#organization",
-          "name": "Himiko Lab",
-          "url": "https://himikolab.my.id/",
-          "logo": "https://himikolab.my.id/favicon.png",
-          "image": "https://himikolab.my.id/og-image.png",
-          "description": "Studio aplikasi digital yang membangun aplikasi harian untuk membantu keseharian pengguna.",
-          "email": "hi@himikolab.my.id",
-          "sameAs": [
-            "https://instagram.com/himiko.lab",
-            "https://tiktok.com/@himiko.lab",
-            "https://www.youtube.com/@HimikoLab",
-            "https://www.threads.com/@himiko.lab",
-            "https://www.facebook.com/profile.php?id=61593282388390",
-            "https://x.com/HimikoLab",
-            "https://id.pinterest.com/labhimiko/"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://himikolab.my.id/#website",
-          "name": "Himiko Lab",
-          "url": "https://himikolab.my.id/",
-          "inLanguage": "id-ID",
-          "publisher": { "@id": "https://himikolab.my.id/#organization" }
-        }
-      ]
-    }
-    </script>
   </head>
-  <body class="bg-background text-foreground">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

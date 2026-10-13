@@ -1,25 +1,33 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Principles from './components/Principles';
-import About from './components/About';
-import LogoMeaning from './components/LogoMeaning';
-import MorvynShowcase from './components/MorvynShowcase';
-import Technology from './components/Technology';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import MorvynPage from './pages/MorvynPage';
+import AboutPage from './pages/AboutPage';
+import NotFound from './pages/NotFound';
+import { useT } from './i18n';
+
+const PAGE_COMPONENTS = {
+  home: Home,
+  morvyn: MorvynPage,
+  about: AboutPage,
+  notFound: NotFound,
+};
 
 export default function App() {
+  const { page, t } = useT();
+  const Page = PAGE_COMPONENTS[page] ?? NotFound;
+
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <Navbar />
-      <Hero />
+      <a href="#konten" className="skip-link">
+        {t.common.skip}
+      </a>
 
-      <main className="flex flex-col gap-16 sm:gap-24">
-        <Principles />
-        <About />
-        <LogoMeaning />
-        <MorvynShowcase />
-        <Technology />
+      <Navbar />
+
+      <main id="konten" tabIndex={-1} className="outline-none">
+        <Page />
       </main>
 
       <Footer />
