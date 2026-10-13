@@ -1,36 +1,51 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import id from './id';
 import en from './en';
+import { DEFAULT_LANG, NOT_FOUND, findRoute, matchPath, pathFor } from '../routes';
 
-const DICTIONARIES = { id, en };
-const DEFAULT_LANG = 'id';
+export const DICTIONARIES = { id, en };
 
 /**
- * Bahasa ditentukan oleh halaman yang dimuat, bukan oleh state.
- * `/` menyajikan index.html (lang="id"), `/en` menyajikan en/index.html (lang="en"),
- * jadi cukup baca atribut lang sekali dari dokumen.
+ * Halaman dan bahasa ditentukan oleh berkas HTML yang dimuat, bukan oleh state.
+ *
+ * Hasil build menandai tiap berkas dengan atribut `lang` dan `data-page` pada
+ * <html> (lihat scripts/prerender.js). Keduanya dibaca apa adanya supaya React
+ * selalu menghidupkan markup yang sama dengan yang sudah dirender di server.
+ * Saat dev server, penanda itu belum ada, jadi alamat browser yang dicocokkan.
  */
-export function detectLang() {
-  if (typeof document === 'undefined') return DEFAULT_LANG;
-  const tag = (document.documentElement.lang || '').slice(0, 2).toLowerCase();
-  return tag in DICTIONARIES ? tag : DEFAULT_LANG;
+export function detectRoute() {
+  if (typeof document === 'undefined') return NOT_FOUND;
+
+  const html = document.documentElement;
+  const page = html.dataset.page;
+
+  if (page) {
+    const lang = (html.lang || '').slice(0, 2).toLowerCase();
+    return findRoute(page, lang) ?? NOT_FOUND;
+  }
+
+  return matchPath(window.location.pathname) ?? NOT_FOUND;
 }
 
-const LanguageContext = createContext({
-  lang: DEFAULT_LANG,
-  t: DICTIONARIES[DEFAULT_LANG],
-});
+const LanguageContext = createContext(null);
 
-/**
- * `lang` hanya diisi saat pre-render di Node, ketika belum ada document.
- * Di browser bahasa dibaca sendiri dari atribut lang halaman.
- */
-export function LanguageProvider({ children, lang: forcedLang }) {
-  const value = useMemo(() => {
-    const lang = forcedLang && forcedLang in DICTIONARIES ? forcedLang : detectLang();
-    return { lang, t: DICTIONARIES[lang] };
-  }, [forcedLang]);
+function buildValue(route) {
+  const lang = route.lang in DICTIONARIES ? route.lang : DEFAULT_LANG;
+  const otherLang = lang === 'id' ? 'en' : 'id';
 
+  return {
+    lang,
+    page: route.page,
+    t: DICTIONARIES[lang],
+    /** Alamat halaman lain dalam bahasa yang sedang dibaca. */
+    to: (page, hash = '') => `${pathFor(page, lang) ?? pathFor(page, DEFAULT_LANG)}${hash}`,
+    /** Halaman yang sama dalam bahasa lain; jatuh ke beranda bila belum ada. */
+    otherLangPath: pathFor(route.page, otherLang) ?? pathFor('home', otherLang),
+  };
+}
+
+export function LanguageProvider({ children, route }) {
+  const value = useMemo(() => buildValue(route), [route.page, route.lang]);
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 

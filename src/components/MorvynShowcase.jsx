@@ -1,42 +1,40 @@
 import React from 'react';
-// Impor subpath, bukan barrel, agar hanya komponen ini yang ikut ke bundel.
-import { Button } from '@heroui/react/button';
-import {
-  NotePencil,
-  Wallet,
-  ListChecks,
-  Newspaper,
-  CloudSun,
-  Repeat,
-  CalendarDots,
-  ArrowUpRight,
-  DownloadSimple,
-} from '@phosphor-icons/react';
+import { ArrowRight, ArrowUpRight } from '@phosphor-icons/react';
 import morvynLogo from '../assets/images/morvyn-logo.svg';
-import { MORVYN_URL } from '../data/links';
+import ExternalLink from './ExternalLink';
+import PlayStoreStatus from './PlayStoreStatus';
+import { FEATURE_ICONS } from './morvynIcons';
+import { BTN_PRIMARY, BTN_SECONDARY, EYEBROW } from './styles';
+import { MORVYN_SITE, PLAY_STORE_LIVE } from '../data/links';
 import { useT } from '../i18n';
 
-const FEATURE_ICONS = [NotePencil, Wallet, ListChecks, Newspaper, CloudSun, Repeat, CalendarDots];
-
+/**
+ * Pengenalan Morvyn di beranda. Sengaja ringkas: rincian tiap menu dan urusan
+ * data ada di halaman /morvyn/, dan penjelasan lengkap di situs resmi Morvyn.
+ */
 export default function MorvynShowcase() {
-  const { t } = useT();
+  const { t, lang, to } = useT();
 
   return (
     <section id="morvyn" className="scroll-mt-28 px-6">
       <div className="mx-auto max-w-6xl">
-        <div className="glass-card rounded-[2rem] p-8 sm:p-12">
+        <div className="glass-card rounded-[2rem] p-6 sm:p-12">
           <div className="grid gap-8 lg:grid-cols-[1fr_1.35fr] lg:gap-12">
             {/* Identitas produk */}
             <div>
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">
-                {t.morvyn.eyebrow}
-              </span>
+              <p className={EYEBROW}>{t.morvyn.eyebrow}</p>
 
               <div className="mt-4 flex items-center gap-4">
                 {/* Berkas logo sudah membawa latar putihnya sendiri, jadi wadahnya
                     cukup dibulatkan dan dipotong agar terbaca sebagai ikon aplikasi. */}
                 <span className="flex h-16 w-16 flex-shrink-0 overflow-hidden rounded-2xl border border-brand-500/10 bg-white shadow-lg shadow-brand-500/15">
-                  <img src={morvynLogo} alt="Logo Morvyn" className="h-full w-full" />
+                  <img
+                    src={morvynLogo}
+                    alt={t.common.morvynLogoAlt}
+                    width="64"
+                    height="64"
+                    className="h-full w-full"
+                  />
                 </span>
                 <div>
                   <h2 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
@@ -50,49 +48,66 @@ export default function MorvynShowcase() {
                 {t.morvyn.description}
               </p>
 
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {t.morvyn.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-full border border-brand-500/15 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+
               <div className="mt-7 flex flex-col gap-3">
+                {PLAY_STORE_LIVE && <PlayStoreStatus />}
+
                 <a
-                  href={MORVYN_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-colors hover:bg-brand-600"
+                  href={to('morvyn')}
+                  className={PLAY_STORE_LIVE ? BTN_SECONDARY : BTN_PRIMARY}
                 >
-                  {t.morvyn.ctaWebsite}
-                  <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
+                  {t.morvyn.ctaDetails}
+                  <ArrowRight size={16} weight="bold" aria-hidden="true" />
                 </a>
 
-                <Button variant="secondary" isDisabled fullWidth>
-                  <DownloadSimple size={16} weight="bold" aria-hidden="true" />
-                  {t.morvyn.ctaDownload}
-                </Button>
+                <ExternalLink href={MORVYN_SITE[lang]} className={BTN_SECONDARY}>
+                  {t.morvyn.ctaWebsite}
+                  <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
+                </ExternalLink>
+
+                {!PLAY_STORE_LIVE && <PlayStoreStatus />}
               </div>
             </div>
 
             {/* Fitur */}
             <div>
-              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">
                 {t.morvyn.featuresLabel}
               </h3>
 
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                 {t.morvyn.features.map((feature, i) => {
                   const Icon = FEATURE_ICONS[i];
                   return (
-                    <div
+                    <li
                       key={feature.title}
-                      className="lift rounded-2xl border border-brand-500/10 bg-white/70 p-4"
+                      className="lift flex gap-3 rounded-2xl border border-brand-500/10 bg-white/70 p-4"
                     >
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                      <span className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
                         <Icon size={19} weight="duotone" aria-hidden="true" />
                       </span>
-                      <h4 className="mt-3 font-display text-sm font-semibold text-ink">
-                        {feature.title}
-                      </h4>
-                      <p className="mt-1 text-xs leading-relaxed text-slate-600">{feature.body}</p>
-                    </div>
+                      <div>
+                        <h4 className="font-display text-sm font-semibold text-ink">
+                          {feature.title}
+                        </h4>
+                        <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                          {feature.short}
+                        </p>
+                      </div>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </div>
           </div>
         </div>

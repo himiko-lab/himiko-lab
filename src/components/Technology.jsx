@@ -1,5 +1,6 @@
 import React from 'react';
 import { Compass, RocketLaunch, PenNib } from '@phosphor-icons/react';
+import SectionHeading from './SectionHeading';
 import { useT } from '../i18n';
 
 const STEP_ICONS = [Compass, RocketLaunch, PenNib];
@@ -8,23 +9,15 @@ export default function Technology() {
   const { t } = useT();
 
   return (
-    <section className="px-6">
+    <section id="process" className="scroll-mt-28 px-6">
       <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">
-            {t.tech.eyebrow}
-          </span>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            {t.tech.title}
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-600">{t.tech.subtitle}</p>
-        </div>
+        <SectionHeading eyebrow={t.tech.eyebrow} title={t.tech.title} subtitle={t.tech.subtitle} />
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <ol className="mt-10 grid gap-4 md:grid-cols-3">
           {t.tech.steps.map((step, i) => {
             const Icon = STEP_ICONS[i];
             return (
-              <div key={step.title} className="glass-card lift relative rounded-3xl p-7">
+              <li key={step.title} className="glass-card lift relative rounded-3xl p-7">
                 <span
                   aria-hidden="true"
                   className="absolute right-6 top-5 font-display text-5xl font-bold leading-none text-brand-500/10"
@@ -36,10 +29,10 @@ export default function Technology() {
                 </span>
                 <h3 className="mt-4 font-display text-lg font-semibold text-ink">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{step.body}</p>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ol>
       </div>
     </section>
   );

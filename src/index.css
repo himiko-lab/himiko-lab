@@ -1,8 +1,4 @@
-@layer theme, base, components, utilities;
-
-/* Urutan wajib: tailwindcss selalu lebih dulu, baru @heroui/styles. */
 @import "tailwindcss";
-@import "@heroui/styles";
 
 /* Font di-host sendiri, tanpa permintaan ke Google Fonts. */
 @import "@fontsource-variable/inter/wght.css";
@@ -30,17 +26,6 @@
   --color-ink: oklch(0.2077 0.0398 265.75);
 }
 
-/*
- * HeroUI menurunkan seluruh varian (hover, soft, focus ring) dari --accent lewat
- * color-mix, jadi cukup timpa satu variabel ini untuk mengubah warna merek
- * di seluruh komponennya. Jangan deklarasi ulang @theme untuk --color-accent:
- * @heroui/styles sudah menjembatani token itu ke Tailwind.
- */
-:root,
-[data-theme="light"] {
-  --accent: oklch(0.5532 0.2345 261.58); /* #1063F8 */
-}
-
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -53,9 +38,43 @@ body {
     radial-gradient(52rem 40rem at 78% 96%, oklch(0.93 0.04 262 / 0.6), transparent 60%),
     linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.985 0.006 258) 42%, oklch(0.962 0.018 262) 100%);
   background-attachment: fixed;
+  color: var(--color-ink);
   font-family: var(--font-sans);
   font-synthesis-weight: none;
   text-rendering: optimizeLegibility;
+}
+
+/*
+ * Indikator fokus keyboard yang sama di seluruh situs. Di atas panel gelap
+ * warnanya diganti putih, sebab biru merek hampir tidak terlihat di sana.
+ */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 3px;
+}
+
+.glass-panel-dark :where(a, button):focus-visible {
+  outline-color: white;
+}
+
+/* Tautan pertama di halaman: tersembunyi sampai difokus dengan Tab. */
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 60;
+  transform: translateY(-200%);
+  border-radius: 9999px;
+  background: var(--color-brand-600);
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+}
+
+.skip-link:focus-visible {
+  transform: none;
+  outline-color: white;
 }
 
 @layer components {

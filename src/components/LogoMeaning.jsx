@@ -1,5 +1,6 @@
 import React from 'react';
 import LogoMark from './LogoMark';
+import SectionHeading from './SectionHeading';
 import { useT } from '../i18n';
 
 const HIGHLIGHTS = ['left', 'slash', 'right'];
@@ -10,24 +11,23 @@ export default function LogoMeaning() {
   return (
     <section id="logo" className="scroll-mt-28 px-6">
       <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">
-            {t.logoMeaning.eyebrow}
-          </span>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            {t.logoMeaning.title}
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-600">{t.logoMeaning.intro}</p>
-        </div>
+        <SectionHeading
+          eyebrow={t.logoMeaning.eyebrow}
+          title={t.logoMeaning.title}
+          subtitle={t.logoMeaning.intro}
+        />
 
         <div className="mt-10 grid items-center gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           {/* Logo utuh */}
           <div className="glass-panel-dark rounded-[2rem] p-10 sm:p-14">
-            <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-brand-500/30 blur-[70px]" />
+            <div
+              aria-hidden="true"
+              className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-brand-500/30 blur-[70px]"
+            />
             <div className="relative flex items-center justify-center">
               <LogoMark
                 highlight="both"
-                title="Logo Himiko Lab"
+                title={t.common.himikoLogoTitle}
                 className="h-40 w-auto text-white sm:h-48"
               />
             </div>
