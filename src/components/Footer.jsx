@@ -12,7 +12,7 @@ import {
 } from '@phosphor-icons/react';
 import himikoLogo from '../assets/images/himiko-logo.svg';
 import ExternalLink from './ExternalLink';
-import { MORVYN_PRIVACY, MORVYN_SITE, SOCIAL } from '../data/links';
+import { MORVYN_PRIVACY, MORVYN_SITE, SLOGAN, SOCIAL } from '../data/links';
 import { useT } from '../i18n';
 
 const CHANNELS = [
@@ -100,8 +100,9 @@ export default function Footer() {
               <img src={himikoLogo} alt="" width="24" height="24" className="h-6 w-6" />
               <span className="font-display text-sm font-semibold text-ink">Himiko Lab</span>
             </a>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-600">
-              {t.footer.analyticsNote}
+            {/* Slogan merek sengaja tidak diterjemahkan, jadi bahasanya ditandai. */}
+            <p lang="en" className="mt-3 font-display text-sm font-medium text-slate-600">
+              {SLOGAN}
             </p>
           </div>
 
@@ -147,9 +148,10 @@ export default function Footer() {
           </nav>
         </div>
 
-        <p className="mt-8 border-t border-brand-500/10 px-2 pt-6 text-xs text-slate-600">
-          {t.footer.copyright}
-        </p>
+        <div className="mt-8 flex flex-col gap-2 border-t border-brand-500/10 px-2 pt-6 text-xs text-slate-600 sm:flex-row sm:justify-between">
+          <p>{t.footer.copyright}</p>
+          <p>{t.footer.analyticsNote}</p>
+        </div>
       </div>
     </footer>
   );

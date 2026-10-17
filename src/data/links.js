@@ -38,6 +38,9 @@ export const SOCIAL = {
 
 export const CONTACT_EMAIL = 'hi@himikolab.my.id';
 
+// Slogan resmi Himiko Lab, sama untuk semua bahasa.
+export const SLOGAN = 'Explore Beyond. Build Within.';
+
 export const SITE_URL = 'https://himikolab.my.id';
 
 export const MORVYN_URL = 'https://morvyn.himikolab.my.id';
