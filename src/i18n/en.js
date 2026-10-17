@@ -166,6 +166,7 @@ export default {
     story: {
       eyebrow: 'How We Think',
       title: 'Technology should bring calm',
+      sloganLabel: 'Our Slogan',
       paragraphs: [
         'We make software that helps with daily matters: taking notes, managing time, handling money, and keeping good habits.',
         'We believe technology should bring calm, not complication. So every product starts from a simple question: what do people actually need, and what can be taken away?',

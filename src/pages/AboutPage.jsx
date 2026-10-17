@@ -5,7 +5,7 @@ import PageHeader from '../components/PageHeader';
 import LogoMeaning from '../components/LogoMeaning';
 import ExternalLink from '../components/ExternalLink';
 import { BTN_PRIMARY, BTN_SECONDARY, EYEBROW } from '../components/styles';
-import { MORVYN_SITE } from '../data/links';
+import { MORVYN_SITE, SLOGAN } from '../data/links';
 import { useT } from '../i18n';
 
 export default function AboutPage() {
@@ -41,6 +41,19 @@ export default function AboutPage() {
                   {story.paragraphs.map((paragraph, i) => (
                     <p key={i}>{paragraph}</p>
                   ))}
+                </div>
+
+                {/* Slogan merek sengaja tidak diterjemahkan, jadi bahasanya ditandai. */}
+                <div className="mt-10 border-t border-white/10 pt-8">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-300">
+                    {story.sloganLabel}
+                  </p>
+                  <p
+                    lang="en"
+                    className="mt-3 font-display text-2xl font-bold tracking-tight text-white text-balance sm:text-3xl"
+                  >
+                    {SLOGAN}
+                  </p>
                 </div>
               </div>
             </div>

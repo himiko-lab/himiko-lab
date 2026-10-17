@@ -167,6 +167,7 @@ export default {
     story: {
       eyebrow: 'Cara Pandang',
       title: 'Teknologi seharusnya memberi ketenangan',
+      sloganLabel: 'Slogan Kami',
       paragraphs: [
         'Kami membuat perangkat lunak yang membantu urusan sehari-hari: mencatat, mengatur waktu, mengelola keuangan, dan menjaga kebiasaan baik.',
         'Kami percaya teknologi seharusnya memberi ketenangan, bukan kerumitan. Karena itu setiap produk kami mulai dari pertanyaan sederhana: apa yang sebenarnya dibutuhkan orang, dan apa yang justru bisa dihilangkan?',

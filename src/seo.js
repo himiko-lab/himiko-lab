@@ -3,6 +3,7 @@ import en from './i18n/en';
 import { DEFAULT_LANG, LANGS, NOT_FOUND, PAGES, ROUTES, pathFor } from './routes';
 import {
   CONTACT_EMAIL,
+  SLOGAN,
   MORVYN_SITE,
   MORVYN_URL,
   PLAY_STORE_LIVE,
@@ -49,6 +50,7 @@ function organizationNode(t) {
     image: OG_IMAGE.url,
     description: t.meta.organization,
     email: CONTACT_EMAIL,
+    slogan: SLOGAN,
     sameAs: Object.entries(SOCIAL)
       .filter(([key]) => key !== 'email')
       .map(([, channel]) => channel.href),
