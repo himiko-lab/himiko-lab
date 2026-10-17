@@ -64,4 +64,4 @@ export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com
  * Ubah ke `true` HANYA setelah PLAY_STORE_URL bisa dibuka publik. Tombol unduh,
  * teks halaman, dan data terstruktur ikut berubah dari nilai ini.
  */
-export const PLAY_STORE_LIVE = false;
+export const PLAY_STORE_LIVE = true;
