@@ -62,12 +62,9 @@ export const MORVYN_PRIVACY = {
 
 export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.himikolab.morvyn';
 
-/*
- * Halaman pengembang Himiko Lab di Google Play. Alamatnya belum dipastikan
- * pemilik, jadi dibiarkan `null` dan tidak ikut ke `sameAs`. Isi dengan alamat
- * lengkapnya begitu sudah ada, jangan ditebak.
- */
-export const PLAY_DEVELOPER_URL = null;
+// Halaman pengembang Himiko Lab di Google Play, ikut ke `sameAs` di data
+// terstruktur. Alamat dari pemilik, 2026-11-17.
+export const PLAY_DEVELOPER_URL = 'https://play.google.com/store/apps/dev?id=5875924293723204317';
 
 // Versi Morvyn yang terakhir diumumkan di situs ini, dipakai data terstruktur.
 export const MORVYN_VERSION = '1.3.1';
