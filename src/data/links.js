@@ -1,12 +1,15 @@
 // Tautan luar dikumpulkan di satu tempat agar tidak terduplikasi
 // antara kamus bahasa Indonesia dan Inggris.
+//
+// Alamat akun ditulis seragam dalam bentuk `https://www.` bila layanannya
+// memakainya, sebab daftar ini juga menjadi `sameAs` di data terstruktur.
 export const SOCIAL = {
   instagram: {
-    href: 'https://instagram.com/himiko.lab',
+    href: 'https://www.instagram.com/himiko.lab',
     handle: '@himiko.lab',
   },
   tiktok: {
-    href: 'https://tiktok.com/@himiko.lab',
+    href: 'https://www.tiktok.com/@himiko.lab',
     handle: '@himiko.lab',
   },
   threads: {
@@ -58,6 +61,16 @@ export const MORVYN_PRIVACY = {
 };
 
 export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.himikolab.morvyn';
+
+/*
+ * Halaman pengembang Himiko Lab di Google Play. Alamatnya belum dipastikan
+ * pemilik, jadi dibiarkan `null` dan tidak ikut ke `sameAs`. Isi dengan alamat
+ * lengkapnya begitu sudah ada, jangan ditebak.
+ */
+export const PLAY_DEVELOPER_URL = null;
+
+// Versi Morvyn yang terakhir diumumkan di situs ini, dipakai data terstruktur.
+export const MORVYN_VERSION = '1.3.1';
 
 /*
  * Satu-satunya sakelar status rilis Morvyn di situs ini.

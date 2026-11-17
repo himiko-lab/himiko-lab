@@ -4,6 +4,7 @@ import himikoLogo from '../assets/images/himiko-logo.svg';
 import LanguageSwitcher from './LanguageSwitcher';
 import ExternalLink from './ExternalLink';
 import { MORVYN_SITE, PLAY_STORE_LIVE, PLAY_STORE_URL } from '../data/links';
+import { PAGES } from '../routes';
 import { useT } from '../i18n';
 
 const MENU_ID = 'menu-navigasi';
@@ -16,9 +17,12 @@ export default function Navbar() {
     { key: 'home', href: to('home'), label: t.nav.home },
     { key: 'morvyn', href: to('morvyn'), label: t.nav.morvyn },
     { key: 'about', href: to('about'), label: t.nav.about },
-    // Footer ada di setiap halaman, jadi kontak cukup berupa jangkar.
-    { key: 'contact', href: '#contact', label: t.nav.contact },
+    { key: 'news', href: to('news'), label: t.nav.news },
+    { key: 'contact', href: to('contact'), label: t.nav.contact },
   ];
+
+  // Tulisan Kabar menandai menu Kabar sebagai bagian yang sedang dibuka.
+  const activeKey = PAGES[page]?.post ? 'news' : page;
 
   // Tindakan utama mengikuti status rilis: situs resmi dulu, unduh setelah terbit.
   const action = PLAY_STORE_LIVE
@@ -52,8 +56,14 @@ export default function Navbar() {
               href={to('home')}
               className="flex flex-shrink-0 items-center gap-2.5 rounded-full transition-opacity hover:opacity-75"
             >
-              {/* Nama di sebelahnya sudah menjadi nama tautan, jadi logonya dekoratif. */}
-              <img src={himikoLogo} alt="" width="32" height="32" className="h-8 w-8" />
+              {/* Logo ini tanda merek sekaligus tautan beranda, jadi alt-nya nama merek. */}
+              <img
+                src={himikoLogo}
+                alt={t.common.himikoLogoAlt}
+                width="32"
+                height="32"
+                className="h-8 w-8"
+              />
               <span className="font-display text-lg font-bold tracking-tight text-ink sm:text-xl">
                 Himiko Lab
               </span>
@@ -64,9 +74,9 @@ export default function Navbar() {
                 <a
                   key={link.key}
                   href={link.href}
-                  aria-current={link.key === page ? 'page' : undefined}
+                  aria-current={link.key === page ? 'page' : link.key === activeKey ? 'true' : undefined}
                   className={`text-sm font-medium transition-colors hover:text-brand-600 ${
-                    link.key === page ? 'text-brand-600' : 'text-slate-600'
+                    link.key === activeKey ? 'text-brand-600' : 'text-slate-600'
                   }`}
                 >
                   {link.label}
@@ -122,9 +132,9 @@ export default function Navbar() {
                   key={link.key}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  aria-current={link.key === page ? 'page' : undefined}
+                  aria-current={link.key === page ? 'page' : link.key === activeKey ? 'true' : undefined}
                   className={`rounded-xl px-3 py-3 text-base font-medium transition-colors hover:bg-brand-50 hover:text-brand-600 ${
-                    link.key === page ? 'bg-brand-50 text-brand-600' : 'text-slate-700'
+                    link.key === activeKey ? 'bg-brand-50 text-brand-600' : 'text-slate-700'
                   }`}
                 >
                   {link.label}

@@ -2,7 +2,9 @@ export default {
   common: {
     skip: 'Skip to content',
     newTab: '(opens in a new tab)',
-    morvynLogoAlt: 'Morvyn logo',
+    // A logo used as a brand mark carries just the brand name as its alt text.
+    himikoLogoAlt: 'Himiko Lab',
+    morvynLogoAlt: 'Morvyn',
     himikoLogoTitle: 'Himiko Lab logo',
   },
 
@@ -11,6 +13,7 @@ export default {
     home: 'Home',
     morvyn: 'Morvyn',
     about: 'About',
+    news: 'News',
     contact: 'Contact',
     morvynSite: 'Morvyn site',
     download: 'Download',
@@ -42,6 +45,16 @@ export default {
       description:
         'Get to know Himiko Lab: a digital app studio building software for everyday life, how it thinks, and the meaning behind its logo.',
     },
+    news: {
+      title: 'Himiko Lab News - Morvyn Release Notes and Updates',
+      description:
+        'News from Himiko Lab: Morvyn release notes and other updates from the studio, newest first.',
+    },
+    contact: {
+      title: 'Contact Himiko Lab - Feedback, Problem Reports, and Partnerships',
+      description:
+        'How to reach Himiko Lab for feedback, problem reports, and partnerships: email, social media accounts, and the Morvyn link on Google Play.',
+    },
     notFound: {
       title: 'Page not found - Himiko Lab',
       description: 'The address you opened does not exist on the Himiko Lab site.',
@@ -53,7 +66,9 @@ export default {
 
   hero: {
     eyebrow: 'Digital App Studio',
-    title: 'Everyday apps that make life feel lighter',
+    // The brand name deliberately sits in the home page's main heading (H1).
+    title: 'Himiko Lab, an everyday app studio',
+    tagline: 'Everyday apps that make life feel lighter',
     subtitle:
       'Himiko Lab is the digital app studio behind Morvyn, an Android app that brings notes, finances, agenda, and other everyday needs into one place.',
     ctaPrimary: 'See Morvyn',
@@ -280,6 +295,102 @@ export default {
         body: 'We use it ourselves daily, listen to feedback, then cut whatever turns out to go unused.',
       },
     ],
+  },
+
+  // The /en/news/ page. Each post lives in `posts`, keyed by its slug from
+  // src/data/posts.js.
+  news: {
+    eyebrow: 'News',
+    title: 'News from Himiko Lab',
+    lead: 'Morvyn release notes and other updates from Himiko Lab, newest first.',
+    listLabel: 'Posts',
+    readMore: 'Read the post',
+    back: 'All news',
+    months: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
+    posts: {
+      // Only the changes that are actually in version 1.3.1.
+      // The Google Play release date is left out because it is not known.
+      'morvyn-1-3-1': {
+        eyebrow: 'Release Notes',
+        title: 'Morvyn 1.3.1: fixes for the Notes editor, overdue tasks, and the Finance widget',
+        summary:
+          'Morvyn 1.3.1 carries four fixes: two in the Notes editor, one for overdue tasks in Agenda, and one in the Finance widget.',
+        intro:
+          'Morvyn 1.3.1 is a maintenance update. This version has four changes, in Notes, Agenda, and the Finance widget.',
+        changesTitle: 'What changed in version 1.3.1',
+        changes: [
+          {
+            area: 'Notes',
+            text: 'The page no longer jumps to the bottom when you tap another line after typing.',
+          },
+          {
+            area: 'Notes',
+            text: 'Formatting buttons apply to the line you are writing again after removing an attachment.',
+          },
+          {
+            area: 'Agenda',
+            text: 'Tasks are marked Overdue as soon as their due time passes, in the Agenda widget too.',
+          },
+          {
+            area: 'Finance widget',
+            text: 'The eye icon switches instantly when tapped.',
+          },
+        ],
+        closingTitle: 'More about Morvyn',
+        closing:
+          'Details on each Morvyn menu are on its official site, and the app is available on Google Play.',
+      },
+    },
+  },
+
+  // The /en/contact/ page.
+  contactPage: {
+    eyebrow: 'Contact',
+    title: 'Contact Himiko Lab',
+    lead: 'You can reach Himiko Lab by email and on social media, for feedback, problem reports, and partnerships.',
+    topics: {
+      eyebrow: 'Topics',
+      title: 'What would you like to tell us?',
+      subtitle: 'All three can go to the same email address.',
+      items: [
+        {
+          title: 'Feedback',
+          body: 'Suggestions, ideas, or your impressions of Morvyn and this site.',
+        },
+        {
+          title: 'Problem reports',
+          body: 'Is something in Morvyn not working as it should? Tell us what happened. Your app version and device model will help us trace it.',
+        },
+        {
+          title: 'Partnerships',
+          body: 'Collaboration offers or other matters related to Himiko Lab.',
+        },
+      ],
+      emailCta: 'Send an email',
+    },
+    channels: {
+      eyebrow: 'Email and Social Media',
+      title: 'Official Himiko Lab accounts',
+      subtitle: 'Follow or reach Himiko Lab through the email and accounts below.',
+    },
+    morvyn: {
+      eyebrow: 'Morvyn',
+      title: 'Morvyn on Google Play',
+      body: 'Morvyn, the Android app made by Himiko Lab, can be downloaded from Google Play. Full details are on the official Morvyn site.',
+    },
   },
 
   footer: {

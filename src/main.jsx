@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App.jsx';
 import { DICTIONARIES, LanguageProvider, detectRoute } from './i18n';
+import { pageMeta } from './i18n/meta';
 import './index.css';
 
 const container = document.getElementById('root');
@@ -22,6 +23,6 @@ if (container.hasChildNodes()) {
   hydrateRoot(container, tree);
 } else {
   document.documentElement.lang = route.lang;
-  document.title = DICTIONARIES[route.lang].meta[route.page].title;
+  document.title = pageMeta(DICTIONARIES[route.lang], route.page).title;
   createRoot(container).render(tree);
 }

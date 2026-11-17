@@ -2,7 +2,9 @@ export default {
   common: {
     skip: 'Lewati ke konten',
     newTab: '(buka di tab baru)',
-    morvynLogoAlt: 'Logo Morvyn',
+    // Logo sebagai tanda merek memakai nama mereknya saja sebagai teks alt.
+    himikoLogoAlt: 'Himiko Lab',
+    morvynLogoAlt: 'Morvyn',
     himikoLogoTitle: 'Logo Himiko Lab',
   },
 
@@ -11,6 +13,7 @@ export default {
     home: 'Beranda',
     morvyn: 'Morvyn',
     about: 'Tentang',
+    news: 'Kabar',
     contact: 'Kontak',
     morvynSite: 'Situs Morvyn',
     download: 'Unduh',
@@ -42,6 +45,16 @@ export default {
       description:
         'Kenali Himiko Lab: studio aplikasi digital yang membangun perangkat lunak untuk keseharian, cara pandangnya, dan arti di balik logonya.',
     },
+    news: {
+      title: 'Kabar Himiko Lab - Catatan Rilis dan Pembaruan Morvyn',
+      description:
+        'Kabar dari Himiko Lab: catatan rilis Morvyn dan pembaruan lain dari studio, diurutkan dari yang terbaru.',
+    },
+    contact: {
+      title: 'Kontak Himiko Lab - Masukan, Laporan Masalah, dan Kerja Sama',
+      description:
+        'Cara menghubungi Himiko Lab untuk masukan, laporan masalah, dan kerja sama: email, akun media sosial, dan tautan Morvyn di Google Play.',
+    },
     notFound: {
       title: 'Halaman tidak ditemukan - Himiko Lab',
       description: 'Alamat yang Anda buka tidak ada di situs Himiko Lab.',
@@ -54,7 +67,9 @@ export default {
 
   hero: {
     eyebrow: 'Studio Aplikasi Digital',
-    title: 'Aplikasi harian yang membuat hidup terasa lebih ringan',
+    // Nama merek sengaja berada di judul utama (H1) beranda.
+    title: 'Himiko Lab, studio aplikasi harian',
+    tagline: 'Aplikasi harian yang membuat hidup terasa lebih ringan',
     subtitle:
       'Himiko Lab adalah studio aplikasi digital pembuat Morvyn, aplikasi Android yang menyatukan catatan, keuangan, agenda, dan kebutuhan harian lain dalam satu tempat.',
     ctaPrimary: 'Lihat Morvyn',
@@ -283,6 +298,102 @@ export default {
         body: 'Kami pakai sendiri setiap hari, mendengarkan masukan, lalu memangkas apa yang ternyata tidak terpakai.',
       },
     ],
+  },
+
+  // Halaman /kabar/. Isi tiap tulisan ada di `posts`, dengan slug dari
+  // src/data/posts.js sebagai kuncinya.
+  news: {
+    eyebrow: 'Kabar',
+    title: 'Kabar dari Himiko Lab',
+    lead: 'Catatan rilis Morvyn dan pembaruan lain dari Himiko Lab, dari yang terbaru.',
+    listLabel: 'Daftar tulisan',
+    readMore: 'Baca tulisan',
+    back: 'Semua kabar',
+    months: [
+      'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember',
+    ],
+    posts: {
+      // Isi tulisan ini hanya perubahan yang memang ada di versi 1.3.1.
+      // Tanggal rilis di Google Play tidak dicantumkan karena tidak diketahui.
+      'morvyn-1-3-1': {
+        eyebrow: 'Catatan Rilis',
+        title: 'Morvyn 1.3.1: perbaikan editor Catatan, tugas terlambat, dan widget Keuangan',
+        summary:
+          'Morvyn 1.3.1 memuat empat perbaikan: dua di editor Catatan, satu untuk tugas terlambat di Agenda, dan satu di widget Keuangan.',
+        intro:
+          'Morvyn 1.3.1 adalah pembaruan perbaikan. Ada empat perubahan di versi ini, di Catatan, Agenda, dan widget Keuangan.',
+        changesTitle: 'Yang berubah di versi 1.3.1',
+        changes: [
+          {
+            area: 'Catatan',
+            text: 'Tampilan tak lagi melompat ke bagian bawah saat mengetuk baris lain sesudah mengetik.',
+          },
+          {
+            area: 'Catatan',
+            text: 'Tombol format kembali mengenai baris yang sedang ditulis sesudah lampiran dihapus.',
+          },
+          {
+            area: 'Agenda',
+            text: 'Tugas langsung ditandai Terlambat begitu jam tenggatnya lewat, juga di widget Agenda.',
+          },
+          {
+            area: 'Widget Keuangan',
+            text: 'Ikon mata berganti seketika saat diketuk.',
+          },
+        ],
+        closingTitle: 'Selengkapnya tentang Morvyn',
+        closing:
+          'Penjelasan tiap menu Morvyn ada di situs resminya, dan aplikasinya tersedia di Google Play.',
+      },
+    },
+  },
+
+  // Halaman /kontak/.
+  contactPage: {
+    eyebrow: 'Kontak',
+    title: 'Hubungi Himiko Lab',
+    lead: 'Himiko Lab bisa dihubungi lewat email dan media sosial, untuk masukan, laporan masalah, maupun kerja sama.',
+    topics: {
+      eyebrow: 'Keperluan',
+      title: 'Apa yang ingin Anda sampaikan?',
+      subtitle: 'Ketiganya bisa dikirim ke alamat email yang sama.',
+      items: [
+        {
+          title: 'Masukan',
+          body: 'Saran, ide, atau kesan Anda tentang Morvyn dan situs ini.',
+        },
+        {
+          title: 'Laporan masalah',
+          body: 'Ada yang tidak berjalan semestinya di Morvyn? Ceritakan apa yang terjadi. Versi aplikasi dan tipe perangkat Anda akan membantu kami menelusurinya.',
+        },
+        {
+          title: 'Kerja sama',
+          body: 'Tawaran kolaborasi atau keperluan lain yang berkaitan dengan Himiko Lab.',
+        },
+      ],
+      emailCta: 'Kirim email',
+    },
+    channels: {
+      eyebrow: 'Email dan Media Sosial',
+      title: 'Akun resmi Himiko Lab',
+      subtitle: 'Ikuti atau hubungi Himiko Lab lewat email dan akun berikut.',
+    },
+    morvyn: {
+      eyebrow: 'Morvyn',
+      title: 'Morvyn di Google Play',
+      body: 'Morvyn, aplikasi Android buatan Himiko Lab, bisa diunduh di Google Play. Penjelasan lengkapnya ada di situs resmi Morvyn.',
+    },
   },
 
   footer: {

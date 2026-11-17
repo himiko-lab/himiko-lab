@@ -8,27 +8,58 @@
  * Menambah halaman berarti menambah satu entri di sini, satu komponen di
  * src/pages, dan teksnya di kedua kamus. Jangan menambah bahasa untuk sebuah
  * halaman sebelum terjemahannya benar-benar ada, sebab hreflang ikut dari sini.
+ *
+ * Tulisan di halaman Kabar tidak ditulis satu per satu di sini: entrinya
+ * dibuat dari src/data/posts.js dan ditandai dengan `post` (slug tulisannya).
  */
+import { POSTS } from './data/posts';
+
 export const LANGS = ['id', 'en'];
 export const DEFAULT_LANG = 'id';
 
 export const PAGES = {
   home: {
     paths: { id: '/', en: '/en/' },
-    lastmod: '2026-10-14',
+    lastmod: '2026-11-17',
     priority: { id: '1.0', en: '0.9' },
   },
   morvyn: {
     paths: { id: '/morvyn/', en: '/en/morvyn/' },
-    lastmod: '2026-10-14',
+    lastmod: '2026-11-17',
     priority: { id: '0.8', en: '0.7' },
   },
   about: {
     paths: { id: '/tentang/', en: '/en/about/' },
-    lastmod: '2026-10-14',
+    lastmod: '2026-11-17',
     priority: { id: '0.7', en: '0.6' },
   },
+  news: {
+    paths: { id: '/kabar/', en: '/en/news/' },
+    lastmod: '2026-11-17',
+    priority: { id: '0.6', en: '0.5' },
+  },
+  contact: {
+    paths: { id: '/kontak/', en: '/en/contact/' },
+    lastmod: '2026-11-17',
+    priority: { id: '0.5', en: '0.4' },
+  },
+  ...Object.fromEntries(
+    POSTS.map((post) => [
+      postPage(post.slug),
+      {
+        post: post.slug,
+        paths: { id: `/kabar/${post.slug}/`, en: `/en/news/${post.slug}/` },
+        lastmod: post.lastmod,
+        priority: { id: '0.6', en: '0.5' },
+      },
+    ]),
+  ),
 };
+
+/** Nama halaman (kunci di PAGES) untuk sebuah tulisan Kabar. */
+export function postPage(slug) {
+  return `news/${slug}`;
+}
 
 /*
  * GitHub Pages menyajikan 404.html untuk setiap alamat yang tidak ada.

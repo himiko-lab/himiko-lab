@@ -20,6 +20,11 @@ export default function Hero() {
             {t.hero.title}
           </h1>
 
+          {/* Kalimat yang dulu menjadi judul utama, kini subjudul di bawah nama merek. */}
+          <p className="mt-4 font-display text-xl font-semibold tracking-tight text-brand-600 text-balance sm:text-2xl">
+            {t.hero.tagline}
+          </p>
+
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg lg:mx-0">
             {t.hero.subtitle}
           </p>

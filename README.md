@@ -16,6 +16,9 @@ Situs resmi Morvyn berada di proyek terpisah (`morvyn.himikolab.my.id`). Reposit
 | Beranda | `/` | `/en/` |
 | Ringkasan Morvyn | `/morvyn/` | `/en/morvyn/` |
 | Tentang | `/tentang/` | `/en/about/` |
+| Kabar | `/kabar/` | `/en/news/` |
+| Tulisan Kabar | `/kabar/<slug>/` | `/en/news/<slug>/` |
+| Kontak | `/kontak/` | `/en/contact/` |
 | Tidak ditemukan | `/404.html` | (satu berkas, dua bahasa) |
 
 Setiap alamat adalah berkas HTML tersendiri yang sudah berisi teks, sehingga dapat dibuka langsung, dimuat ulang, dan diindeks mesin pencari tanpa menunggu JavaScript.
@@ -58,12 +61,19 @@ Judul, deskripsi, canonical, dan data terstruktur baru ditulis saat build. Perik
 * `src/seo.js` - isi `<head>` dan data terstruktur tiap halaman.
 * `src/i18n/id.js` dan `src/i18n/en.js` - seluruh teks situs.
 * `src/data/links.js` - tautan luar dan sakelar status rilis Morvyn.
+* `src/data/posts.js` - daftar tulisan Kabar (slug dan tanggal terbit).
 * `scripts/prerender.js` - menulis berkas HTML tiap halaman setelah Vite selesai.
 
 ### Menambah halaman
 1. Tambahkan entri di `PAGES` pada `src/routes.js`.
 2. Buat komponennya di `src/pages/` dan daftarkan di `src/App.jsx`.
 3. Isi `meta` dan teksnya di kedua kamus bahasa.
+
+### Menambah tulisan Kabar
+1. Tambahkan entri di `POSTS` pada `src/data/posts.js`, paling atas.
+2. Isi judul dan isinya di `news.posts` pada kedua kamus bahasa, dengan slug yang sama sebagai kunci.
+
+Alamat, sitemap, jejak halaman, dan data terstruktur `BlogPosting` ikut dari dua langkah itu.
 
 Cantumkan sebuah bahasa di `paths` hanya bila terjemahannya sudah ada, sebab hreflang dan sitemap mengikuti daftar itu.
 

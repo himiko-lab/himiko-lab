@@ -1,11 +1,15 @@
 import id from './i18n/id';
 import en from './i18n/en';
 import { DEFAULT_LANG, LANGS, NOT_FOUND, PAGES, ROUTES, pathFor } from './routes';
+import { pageLabel, pageMeta, postFor } from './i18n/meta';
+import { POSTS } from './data/posts';
 import {
   CONTACT_EMAIL,
   SLOGAN,
   MORVYN_SITE,
   MORVYN_URL,
+  MORVYN_VERSION,
+  PLAY_DEVELOPER_URL,
   PLAY_STORE_LIVE,
   PLAY_STORE_URL,
   SITE_URL,
@@ -40,20 +44,37 @@ const esc = (value) =>
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
+/*
+ * Situs ini sumber utama entitas Himiko Lab, dan situs Morvyn merujuk @id yang
+ * sama. Simpul ini ditulis sama persis di semua halaman dan kedua bahasa,
+ * kecuali `description` yang mengikuti bahasa halaman.
+ */
 function organizationNode(t) {
   return {
     '@type': 'Organization',
     '@id': ORG_ID,
     name: 'Himiko Lab',
+    alternateName: ['HimikoLab'],
     url: `${SITE_URL}/`,
     logo: { '@type': 'ImageObject', ...ORG_LOGO },
     image: OG_IMAGE.url,
     description: t.meta.organization,
     email: CONTACT_EMAIL,
     slogan: SLOGAN,
-    sameAs: Object.entries(SOCIAL)
-      .filter(([key]) => key !== 'email')
-      .map(([, channel]) => channel.href),
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: CONTACT_EMAIL,
+      url: abs(pathFor('contact', DEFAULT_LANG)),
+      availableLanguage: ['id', 'en'],
+    },
+    // Hanya akun di luar situs ini. Situs ini sendiri tidak ikut.
+    sameAs: [
+      ...Object.entries(SOCIAL)
+        .filter(([key]) => key !== 'email')
+        .map(([, channel]) => channel.href),
+      ...(PLAY_DEVELOPER_URL ? [PLAY_DEVELOPER_URL] : []),
+    ],
   };
 }
 
@@ -77,6 +98,7 @@ function appNode(t) {
     description: t.meta.app,
     applicationCategory: 'ProductivityApplication',
     operatingSystem: 'Android',
+    softwareVersion: MORVYN_VERSION,
     inLanguage: LANGS.map((lang) => LANG_TAG[lang]),
     image: `${MORVYN_URL}/logo-morvyn.svg`,
     author: { '@id': ORG_ID },
@@ -99,35 +121,71 @@ function appNode(t) {
 
 function breadcrumbNode(route, t) {
   const url = abs(route.path);
+  // Tulisan Kabar berada satu tingkat di bawah halaman Kabar.
+  const trail = [
+    { name: t.nav.home, item: abs(pathFor('home', route.lang)) },
+    ...(PAGES[route.page].post
+      ? [{ name: t.nav.news, item: abs(pathFor('news', route.lang)) }]
+      : []),
+    { name: pageLabel(t, route.page), item: url },
+  ];
+
   return {
     '@type': 'BreadcrumbList',
     '@id': `${url}#breadcrumb`,
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: t.nav.home, item: abs(pathFor('home', route.lang)) },
-      { '@type': 'ListItem', position: 2, name: t.nav[route.page], item: url },
-    ],
+    itemListElement: trail.map((entry, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      ...entry,
+    })),
   };
 }
 
+function postNode(route, t) {
+  const url = abs(route.path);
+  const post = postFor(t, route.page);
+  const { datePublished } = POSTS.find((entry) => entry.slug === post.slug);
+
+  return {
+    '@type': 'BlogPosting',
+    '@id': `${url}#post`,
+    headline: post.title,
+    description: post.summary,
+    url,
+    mainEntityOfPage: { '@id': `${url}#webpage` },
+    datePublished,
+    inLanguage: LANG_TAG[route.lang],
+    image: OG_IMAGE.url,
+    author: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
+    about: { '@id': APP_ID },
+  };
+}
+
+const WEB_PAGE_TYPE = { about: 'AboutPage', contact: 'ContactPage', news: 'CollectionPage' };
+
 function structuredData(route, t) {
   const url = abs(route.path);
-  const meta = t.meta[route.page];
+  const meta = pageMeta(t, route.page);
   const isHome = route.page === 'home';
+  const isPost = Boolean(PAGES[route.page].post);
   const showsApp = isHome || route.page === 'morvyn';
 
   const webPage = {
-    '@type': route.page === 'about' ? 'AboutPage' : 'WebPage',
+    '@type': WEB_PAGE_TYPE[route.page] ?? 'WebPage',
     '@id': `${url}#webpage`,
     url,
     name: meta.title,
     description: meta.description,
     inLanguage: LANG_TAG[route.lang],
     isPartOf: { '@id': WEBSITE_ID },
-    about: { '@id': route.page === 'morvyn' ? APP_ID : ORG_ID },
+    about: { '@id': route.page === 'morvyn' || isPost ? APP_ID : ORG_ID },
     primaryImageOfPage: { '@type': 'ImageObject', ...OG_IMAGE },
   };
 
   if (route.page === 'morvyn') webPage.mainEntity = { '@id': APP_ID };
+  if (route.page === 'contact') webPage.mainEntity = { '@id': ORG_ID };
+  if (isPost) webPage.mainEntity = { '@id': `${url}#post` };
   if (isHome) webPage.mentions = { '@id': APP_ID };
   if (!isHome) webPage.breadcrumb = { '@id': `${url}#breadcrumb` };
 
@@ -138,6 +196,7 @@ function structuredData(route, t) {
       websiteNode(),
       webPage,
       ...(showsApp ? [appNode(t)] : []),
+      ...(isPost ? [postNode(route, t)] : []),
       ...(isHome ? [] : [breadcrumbNode(route, t)]),
     ],
   };
@@ -157,7 +216,7 @@ function alternates(page) {
 
 export function renderHead(route) {
   const t = DICTIONARIES[route.lang];
-  const meta = t.meta[route.page];
+  const meta = pageMeta(t, route.page);
 
   if (route.page === NOT_FOUND.page) {
     return [
@@ -168,6 +227,7 @@ export function renderHead(route) {
   }
 
   const url = abs(route.path);
+  const post = POSTS.find((entry) => entry.slug === PAGES[route.page].post);
   const otherLocales = LANGS.filter((lang) => lang !== route.lang && PAGES[route.page].paths[lang]);
 
   // JSON-LD berada di dalam <script>, jadi "<" di-escape agar tidak bisa menutup tag.
@@ -184,7 +244,8 @@ export function renderHead(route) {
       (alt) => `<link rel="alternate" hreflang="${alt.hreflang}" href="${esc(alt.href)}" />`,
     ),
     '',
-    '<meta property="og:type" content="website" />',
+    `<meta property="og:type" content="${post ? 'article' : 'website'}" />`,
+    ...(post ? [`<meta property="article:published_time" content="${post.datePublished}" />`] : []),
     `<meta property="og:url" content="${esc(url)}" />`,
     `<meta property="og:locale" content="${OG_LOCALE[route.lang]}" />`,
     ...otherLocales.map(
