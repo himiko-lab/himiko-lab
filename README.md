@@ -67,6 +67,9 @@ Judul, deskripsi, canonical, dan data terstruktur baru ditulis saat build. Perik
 * `scripts/sync-play-release.mjs` - menambah rilis baru dari Google Play ke `releases.json`.
 * `scripts/prerender.js` - menulis berkas HTML tiap halaman setelah Vite selesai.
 
+### Ikon situs
+`public/favicon.ico` (16, 32, 48 px), `public/icon-192.png`, dan `public/apple-touch-icon.png` (180 px, berlatar putih) dibuat dari `src/assets/images/himiko-logo.svg` lewat `node scripts/make-icons.mjs`, yang butuh `rsvg-convert` (`brew install librsvg`). Hasilnya di-commit, jadi skrip ini hanya perlu dijalankan lagi bila logonya berubah. `public/favicon.png` (512 px) sengaja tidak ikut dibuat ulang, sebab alamatnya dipakai logo Organization di data terstruktur.
+
 ### Menambah halaman
 1. Tambahkan entri di `PAGES` pada `src/routes.js`.
 2. Buat komponennya di `src/pages/` dan daftarkan di `src/App.jsx`.
