@@ -21,8 +21,9 @@ export default function Navbar() {
     { key: 'contact', href: to('contact'), label: t.nav.contact },
   ];
 
-  // Tulisan Kabar menandai menu Kabar sebagai bagian yang sedang dibuka.
-  const activeKey = PAGES[page]?.post ? 'news' : page;
+  // Tulisan dan halaman daftar Kabar menandai menu Kabar sebagai bagian yang
+  // sedang dibuka.
+  const activeKey = PAGES[page]?.post || PAGES[page]?.listPage ? 'news' : page;
 
   // Tindakan utama mengikuti status rilis: situs resmi dulu, unduh setelah terbit.
   const action = PLAY_STORE_LIVE

@@ -17,6 +17,7 @@ Situs resmi Morvyn berada di proyek terpisah (`morvyn.himikolab.my.id`). Reposit
 | Ringkasan Morvyn | `/morvyn/` | `/en/morvyn/` |
 | Tentang | `/tentang/` | `/en/about/` |
 | Kabar | `/kabar/` | `/en/news/` |
+| Kabar, halaman berikutnya | `/kabar/halaman/<n>/` | `/en/news/page/<n>/` |
 | Tulisan Kabar | `/kabar/<slug>/` | `/en/news/<slug>/` |
 | Kontak | `/kontak/` | `/en/contact/` |
 | Tidak ditemukan | `/404.html` | (satu berkas, dua bahasa) |
@@ -100,6 +101,9 @@ Google Play Android Developer API dan akun layanannya sudah disiapkan untuk situ
 Kalau gagal dengan galat 403, lognya menyebut penyebabnya. Paling sering: izin akun layanan di Play Console (Pengguna dan izin, akses ke Morvyn) belum berlaku.
 
 GitHub menonaktifkan jadwal workflow di repositori publik yang 60 hari tidak ada aktivitas, dan mengirim email sebelumnya. Kalau itu terjadi, aktifkan lagi dari tab Actions.
+
+### Halaman daftar Kabar
+Daftar Kabar menampilkan `NEWS_PAGE_SIZE` tulisan per halaman (sekarang 10, diatur di `src/data/posts.js`). Halaman pertama ada di `/kabar/`, dan halaman kedua dan seterusnya (`/kabar/halaman/2/`, ...) dibuat otomatis dari jumlah tulisan, lengkap dengan sitemap dan hreflang. Navigasi halaman baru muncul setelah tulisannya lebih dari satu halaman.
 
 ### Menambah tulisan Kabar lain
 Untuk tulisan yang bukan catatan rilis:

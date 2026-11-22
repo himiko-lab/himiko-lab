@@ -322,6 +322,20 @@ export default {
       'November',
       'December',
     ],
+    // The second and later pages of the news list. {page} is the page number,
+    // {total} the number of pages.
+    pageMeta: {
+      title: 'Himiko Lab News - Page {page}',
+      description:
+        'News from Himiko Lab, page {page}: Morvyn release notes and other updates from the studio, newest first.',
+    },
+    pagination: {
+      label: 'News list pages',
+      previous: 'Previous',
+      next: 'Next',
+      page: 'Page {page}',
+      pageOf: 'Page {page} of {total}',
+    },
     // Templates for generated release notes. {version} and {count} come from
     // the release data, {areas} from the app section names in the Play text.
     auto: {

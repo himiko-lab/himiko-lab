@@ -43,6 +43,17 @@ export const POSTS = [...RELEASE_POSTS, ...OTHER_POSTS].sort(
     (b.release?.versionCode ?? 0) - (a.release?.versionCode ?? 0),
 );
 
+// Jumlah tulisan per halaman daftar Kabar. Halaman pertama ada di /kabar/,
+// selebihnya di /kabar/halaman/2/ dan seterusnya (lihat src/routes.js).
+export const NEWS_PAGE_SIZE = 10;
+
+export const NEWS_PAGE_COUNT = Math.max(1, Math.ceil(POSTS.length / NEWS_PAGE_SIZE));
+
+/** Tulisan di halaman daftar Kabar ke-`n` (mulai dari 1). */
+export function postsOnPage(n) {
+  return POSTS.slice((n - 1) * NEWS_PAGE_SIZE, n * NEWS_PAGE_SIZE);
+}
+
 /** Rilis Morvyn terbaru menurut versionCode. */
 export const LATEST_RELEASE = RELEASES.releases.reduce((a, b) =>
   b.versionCode > a.versionCode ? b : a,

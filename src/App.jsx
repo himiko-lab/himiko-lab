@@ -22,8 +22,13 @@ const PAGE_COMPONENTS = {
 
 export default function App() {
   const { page, t } = useT();
-  // Semua tulisan Kabar memakai satu komponen, isinya ikut dari kamus.
-  const Page = PAGES[page]?.post ? NewsPost : (PAGE_COMPONENTS[page] ?? NotFound);
+  // Semua tulisan Kabar memakai satu komponen, isinya ikut dari kamus. Begitu
+  // juga semua halaman daftar Kabar.
+  const Page = PAGES[page]?.post
+    ? NewsPost
+    : PAGES[page]?.listPage
+      ? NewsPage
+      : (PAGE_COMPONENTS[page] ?? NotFound);
 
   return (
     <div className="min-h-screen overflow-x-hidden">

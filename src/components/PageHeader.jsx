@@ -1,7 +1,7 @@
 import React from 'react';
 import { EYEBROW } from './styles';
 import { PAGES } from '../routes';
-import { pageLabel } from '../i18n/meta';
+import { laterListPage, pageLabel } from '../i18n/meta';
 import { useT } from '../i18n';
 
 const CRUMB_LINK = 'underline-offset-4 transition-colors hover:text-brand-600 hover:underline';
@@ -13,6 +13,7 @@ const CRUMB_LINK = 'underline-offset-4 transition-colors hover:text-brand-600 ho
 export default function PageHeader({ eyebrow, title, lead, media, meta, children }) {
   const { t, page, to } = useT();
   const isPost = Boolean(PAGES[page]?.post);
+  const isLaterListPage = Boolean(laterListPage(page));
 
   return (
     <section className="px-6 pb-12 pt-28 sm:pb-16 sm:pt-36 lg:pt-40">
@@ -29,7 +30,7 @@ export default function PageHeader({ eyebrow, title, lead, media, meta, children
             </li>
             {/* Tulisan Kabar berada satu tingkat di bawah halaman Kabar. Judulnya
                 panjang dan sudah menjadi H1, jadi jejaknya berhenti di Kabar. */}
-            {isPost ? (
+            {isPost || isLaterListPage ? (
               <li>
                 <a href={to('news')} className={CRUMB_LINK}>
                   {t.nav.news}
@@ -39,6 +40,17 @@ export default function PageHeader({ eyebrow, title, lead, media, meta, children
               <li aria-current="page" className="font-medium text-ink">
                 {pageLabel(t, page)}
               </li>
+            )}
+            {/* Halaman daftar Kabar kedua dan seterusnya: Beranda / Kabar / Halaman 2. */}
+            {isLaterListPage && (
+              <>
+                <li aria-hidden="true" className="text-slate-400">
+                  /
+                </li>
+                <li aria-current="page" className="font-medium text-ink">
+                  {pageLabel(t, page)}
+                </li>
+              </>
             )}
           </ol>
         </nav>

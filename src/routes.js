@@ -12,11 +12,19 @@
  * Tulisan di halaman Kabar tidak ditulis satu per satu di sini: entrinya
  * dibuat dari src/data/posts.js (yang sebagian besar berasal dari
  * src/data/releases.json) dan ditandai dengan `post` (slug tulisannya).
+ * Halaman daftar Kabar ditandai dengan `listPage` (nomor halamannya), dan
+ * halaman kedua dan seterusnya juga dibuat otomatis dari jumlah tulisan.
  */
-import { POSTS } from './data/posts';
+import { NEWS_PAGE_COUNT, POSTS } from './data/posts';
 
 export const LANGS = ['id', 'en'];
 export const DEFAULT_LANG = 'id';
+
+// Setiap tulisan baru menggeser isi semua halaman daftar Kabar, jadi semuanya
+// memakai tanggal ubah tulisan terbaru.
+const NEWS_LASTMOD = ['2026-11-17', ...POSTS.map((post) => post.lastmod)].reduce((a, b) =>
+  b > a ? b : a,
+);
 
 export const PAGES = {
   home: {
@@ -35,13 +43,9 @@ export const PAGES = {
     priority: { id: '0.7', en: '0.6' },
   },
   news: {
+    listPage: 1,
     paths: { id: '/kabar/', en: '/en/news/' },
-    // Daftar Kabar ikut berubah setiap ada tulisan baru, termasuk catatan
-    // rilis yang ditambahkan otomatis dari Google Play.
-    lastmod: [
-      '2026-11-17',
-      ...POSTS.map((post) => post.lastmod),
-    ].reduce((a, b) => (b > a ? b : a)),
+    lastmod: NEWS_LASTMOD,
     priority: { id: '0.6', en: '0.5' },
   },
   contact: {
@@ -49,6 +53,17 @@ export const PAGES = {
     lastmod: '2026-11-17',
     priority: { id: '0.5', en: '0.4' },
   },
+  ...Object.fromEntries(
+    Array.from({ length: NEWS_PAGE_COUNT - 1 }, (_, i) => i + 2).map((n) => [
+      newsListPage(n),
+      {
+        listPage: n,
+        paths: { id: `/kabar/halaman/${n}/`, en: `/en/news/page/${n}/` },
+        lastmod: NEWS_LASTMOD,
+        priority: { id: '0.4', en: '0.3' },
+      },
+    ]),
+  ),
   ...Object.fromEntries(
     POSTS.map((post) => [
       postPage(post.slug),
@@ -61,6 +76,11 @@ export const PAGES = {
     ]),
   ),
 };
+
+/** Nama halaman (kunci di PAGES) untuk halaman daftar Kabar ke-`n`. */
+export function newsListPage(n) {
+  return n === 1 ? 'news' : `news/page/${n}`;
+}
 
 /** Nama halaman (kunci di PAGES) untuk sebuah tulisan Kabar. */
 export function postPage(slug) {

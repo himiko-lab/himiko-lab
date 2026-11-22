@@ -10,7 +10,7 @@ import { parseReleaseNotes } from '../data/releaseNotes';
  * supaya <title>, jejak halaman, dan isi tulisan tidak pernah berbeda.
  */
 
-const fill = (template, values) =>
+export const fill = (template, values) =>
   template.replace(/\{(\w+)\}/g, (_, key) => values[key] ?? `{${key}}`);
 
 const withPeriod = (text) => (/[.!?]$/.test(text) ? text : `${text}.`);
@@ -66,13 +66,28 @@ export function postFor(t, page) {
   return slug ? postContent(t, slug) : null;
 }
 
+/** Nomor halaman bila ini halaman daftar Kabar kedua dan seterusnya, selain itu `null`. */
+export function laterListPage(page) {
+  const n = PAGES[page]?.listPage;
+  return n > 1 ? n : null;
+}
+
 export function pageMeta(t, page) {
   const post = postFor(t, page);
   if (post) return { title: `${post.title} - Himiko Lab`, description: post.summary };
+  const n = laterListPage(page);
+  if (n) {
+    return {
+      title: fill(t.news.pageMeta.title, { page: n }),
+      description: fill(t.news.pageMeta.description, { page: n }),
+    };
+  }
   return t.meta[page];
 }
 
 export function pageLabel(t, page) {
+  const n = laterListPage(page);
+  if (n) return fill(t.news.pagination.page, { page: n });
   return postFor(t, page)?.title ?? t.nav[page];
 }
 

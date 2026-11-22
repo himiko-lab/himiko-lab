@@ -1,7 +1,7 @@
 import id from './i18n/id';
 import en from './i18n/en';
 import { DEFAULT_LANG, LANGS, NOT_FOUND, PAGES, ROUTES, pathFor } from './routes';
-import { pageLabel, pageMeta, postFor } from './i18n/meta';
+import { laterListPage, pageLabel, pageMeta, postFor } from './i18n/meta';
 import { POSTS } from './data/posts';
 import {
   CONTACT_EMAIL,
@@ -121,10 +121,11 @@ function appNode(t) {
 
 function breadcrumbNode(route, t) {
   const url = abs(route.path);
-  // Tulisan Kabar berada satu tingkat di bawah halaman Kabar.
+  // Tulisan Kabar dan halaman daftar Kabar kedua dan seterusnya berada satu
+  // tingkat di bawah halaman Kabar.
   const trail = [
     { name: t.nav.home, item: abs(pathFor('home', route.lang)) },
-    ...(PAGES[route.page].post
+    ...(PAGES[route.page].post || laterListPage(route.page)
       ? [{ name: t.nav.news, item: abs(pathFor('news', route.lang)) }]
       : []),
     { name: pageLabel(t, route.page), item: url },
@@ -162,7 +163,8 @@ function postNode(route, t) {
   };
 }
 
-const WEB_PAGE_TYPE = { about: 'AboutPage', contact: 'ContactPage', news: 'CollectionPage' };
+// Semua halaman daftar Kabar (`listPage`) adalah CollectionPage.
+const WEB_PAGE_TYPE = { about: 'AboutPage', contact: 'ContactPage' };
 
 function structuredData(route, t) {
   const url = abs(route.path);
@@ -172,7 +174,7 @@ function structuredData(route, t) {
   const showsApp = isHome || route.page === 'morvyn';
 
   const webPage = {
-    '@type': WEB_PAGE_TYPE[route.page] ?? 'WebPage',
+    '@type': PAGES[route.page].listPage ? 'CollectionPage' : (WEB_PAGE_TYPE[route.page] ?? 'WebPage'),
     '@id': `${url}#webpage`,
     url,
     name: meta.title,

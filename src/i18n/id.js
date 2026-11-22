@@ -325,6 +325,20 @@ export default {
       'November',
       'Desember',
     ],
+    // Halaman daftar Kabar kedua dan seterusnya. {page} diisi nomor halaman,
+    // {total} jumlah halaman.
+    pageMeta: {
+      title: 'Kabar Himiko Lab - Halaman {page}',
+      description:
+        'Kabar dari Himiko Lab, halaman {page}: catatan rilis Morvyn dan pembaruan lain dari studio, diurutkan dari yang terbaru.',
+    },
+    pagination: {
+      label: 'Halaman daftar Kabar',
+      previous: 'Sebelumnya',
+      next: 'Berikutnya',
+      page: 'Halaman {page}',
+      pageOf: 'Halaman {page} dari {total}',
+    },
     // Templat catatan rilis otomatis. {version} dan {count} diisi dari data
     // rilis, {areas} dari nama bagian aplikasi di teks Play.
     auto: {
