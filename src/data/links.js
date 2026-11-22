@@ -3,6 +3,8 @@
 //
 // Alamat akun ditulis seragam dalam bentuk `https://www.` bila layanannya
 // memakainya, sebab daftar ini juga menjadi `sameAs` di data terstruktur.
+import { LATEST_RELEASE } from './posts';
+
 export const SOCIAL = {
   instagram: {
     href: 'https://www.instagram.com/himiko.lab',
@@ -66,8 +68,9 @@ export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com
 // terstruktur. Alamat dari pemilik, 2026-11-17.
 export const PLAY_DEVELOPER_URL = 'https://play.google.com/store/apps/dev?id=5875924293723204317';
 
-// Versi Morvyn yang terakhir diumumkan di situs ini, dipakai data terstruktur.
-export const MORVYN_VERSION = '1.3.1';
+// Versi Morvyn terkini, dipakai data terstruktur. Ikut otomatis dari rilis
+// terbaru di src/data/releases.json, yang disinkronkan dari Google Play.
+export const MORVYN_VERSION = LATEST_RELEASE.version;
 
 /*
  * Satu-satunya sakelar status rilis Morvyn di situs ini.

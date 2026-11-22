@@ -1,18 +1,49 @@
 /*
  * Daftar tulisan di halaman Kabar, dari yang terbaru.
  *
- * Yang ada di sini hanya data yang sama untuk semua bahasa. Judul dan isi
- * tiap tulisan ada di kamus bahasa, di `news.posts[slug]`.
+ * Catatan rilis Morvyn tidak ditulis satu per satu di sini. Setiap entri di
+ * src/data/releases.json otomatis menjadi satu tulisan, dan berkas itu
+ * ditambahi setiap hari oleh scripts/sync-play-release.mjs dari Google Play.
+ * Judul dan isinya dibuat dari teks "Yang baru" di Play (lihat `postContent`
+ * di src/i18n/meta.js), kecuali ada tulisan tangan di `news.posts[slug]` pada
+ * kamus bahasa, yang selalu didahulukan.
  *
- * Menambah tulisan: satu entri di sini (paling atas) dan isinya di kedua
- * kamus. Alamat, sitemap, dan data terstrukturnya ikut dari daftar ini.
- * `datePublished` adalah tanggal tulisan terbit di situs ini, bukan tanggal
- * rilis aplikasinya.
+ * `datePublished` adalah tanggal tulisan terbit di situs ini (untuk rilis:
+ * hari versi itu terdeteksi di Play), bukan tanggal rilis aplikasinya.
  */
-export const POSTS = [
-  {
-    slug: 'morvyn-1-3-1',
-    datePublished: '2026-11-16',
-    lastmod: '2026-11-17',
-  },
-];
+import RELEASES from './releases.json';
+
+/** Slug tulisan untuk satu versi, mis. 1.7.0 menjadi `morvyn-1-7-0`. */
+export function releaseSlug(version) {
+  return `morvyn-${version.replaceAll('.', '-')}`;
+}
+
+// Tanggal ubah terakhir untuk tulisan yang disunting sesudah terbit.
+const LASTMOD = {
+  'morvyn-1-3-1': '2026-11-17',
+};
+
+const RELEASE_POSTS = RELEASES.releases.map((release) => {
+  const slug = releaseSlug(release.version);
+  return {
+    slug,
+    release,
+    datePublished: release.addedIso,
+    lastmod: LASTMOD[slug] ?? release.addedIso,
+  };
+});
+
+// Tulisan yang bukan catatan rilis: entri { slug, datePublished, lastmod }
+// di sini, isinya di `news.posts[slug]` pada kedua kamus.
+const OTHER_POSTS = [];
+
+export const POSTS = [...RELEASE_POSTS, ...OTHER_POSTS].sort(
+  (a, b) =>
+    b.datePublished.localeCompare(a.datePublished) ||
+    (b.release?.versionCode ?? 0) - (a.release?.versionCode ?? 0),
+);
+
+/** Rilis Morvyn terbaru menurut versionCode. */
+export const LATEST_RELEASE = RELEASES.releases.reduce((a, b) =>
+  b.versionCode > a.versionCode ? b : a,
+);

@@ -10,9 +10,9 @@ import { postFor, formatDate } from '../i18n/meta';
 import { useT } from '../i18n';
 
 /**
- * Satu tulisan Kabar. Isinya sepenuhnya dari kamus (`news.posts[slug]`):
- * pengantar, daftar perubahan, dan penutup yang menautkan ke situs Morvyn
- * dan Google Play.
+ * Satu tulisan Kabar: pengantar, daftar perubahan, dan penutup yang menautkan
+ * ke situs Morvyn dan Google Play. Isinya dari `postFor` (src/i18n/meta.js),
+ * yaitu catatan rilis Google Play atau tulisan tangan di kamus.
  */
 export default function NewsPost() {
   const { t, lang, page, to } = useT();
@@ -29,27 +29,31 @@ export default function NewsPost() {
       />
 
       <div className="flex flex-col gap-10 px-6 sm:gap-12">
-        <section className="mx-auto w-full max-w-3xl">
-          <div className="glass-card rounded-[2rem] p-6 sm:p-10">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-              {post.changesTitle}
-            </h2>
+        {post.changes?.length > 0 && (
+          <section className="mx-auto w-full max-w-3xl">
+            <div className="glass-card rounded-[2rem] p-6 sm:p-10">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+                {post.changesTitle}
+              </h2>
 
-            <ul className="mt-6 grid gap-4">
-              {post.changes.map((change) => (
-                <li
-                  key={change.text}
-                  className="rounded-2xl border border-brand-500/10 bg-white/70 p-4 sm:p-5"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">
-                    {change.area}
-                  </p>
-                  <p className="mt-1.5 text-base leading-relaxed text-slate-700">{change.text}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+              <ul className="mt-6 grid gap-4">
+                {post.changes.map((change) => (
+                  <li
+                    key={change.text}
+                    className="rounded-2xl border border-brand-500/10 bg-white/70 p-4 sm:p-5"
+                  >
+                    {change.area && (
+                      <p className="mb-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">
+                        {change.area}
+                      </p>
+                    )}
+                    <p className="text-base leading-relaxed text-slate-700">{change.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
 
         <section className="mx-auto w-full max-w-3xl text-center">
           <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">

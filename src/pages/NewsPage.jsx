@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader';
 import { EYEBROW, TEXT_LINK } from '../components/styles';
 import { POSTS } from '../data/posts';
 import { postPage } from '../routes';
-import { formatDate } from '../i18n/meta';
+import { formatDate, postContent } from '../i18n/meta';
 import { useT } from '../i18n';
 
 /** Daftar tulisan Kabar, dari yang terbaru. Urutannya mengikuti src/data/posts.js. */
@@ -22,7 +22,7 @@ export default function NewsPage() {
 
           <ul className="grid gap-4">
             {POSTS.map(({ slug, datePublished }) => {
-              const post = n.posts[slug];
+              const post = postContent(t, slug);
               const href = to(postPage(slug));
 
               return (

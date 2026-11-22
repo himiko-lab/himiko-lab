@@ -76,7 +76,8 @@ export default {
   },
 
   // Product data shared by the home page and /en/morvyn/.
-  // Source: morvyn.himikolab.my.id and its privacy policy (checked 2026-10-14).
+  // Source: morvyn.himikolab.my.id and its privacy policy (checked 2026-11-22,
+  // Morvyn 1.7.0).
   morvyn: {
     name: 'Morvyn',
     eyebrow: 'Our Product',
@@ -89,17 +90,17 @@ export default {
       {
         title: 'Notes',
         short: 'Text, checklists, images, handwritten sketches, and PDF attachments in one note.',
-        long: 'Write plain notes, bullet lists, or checklists. A note can hold images, handwritten sketches, maths formulas, and PDF attachments, and documents can be scanned into PDFs.',
+        long: 'Write plain notes, bullet lists, or checklists. A note can hold images, handwritten sketches, maths formulas, and PDF attachments, and documents can be scanned into PDFs. Notes can also be locked with your phone\'s screen lock.',
       },
       {
         title: 'Finance',
         short: 'Record income and expenses across multiple wallets, then see the pattern in charts.',
-        long: 'Record income and expenses across multiple wallets, move balances between them, see the pattern in charts, and check currency exchange rates.',
+        long: 'Record income and expenses across multiple wallets, move balances between them, see the pattern in charts, and check currency exchange rates. Debts & Loans tracks installments and reminds you of due dates.',
       },
       {
         title: 'Agenda',
         short: 'Alarms, event schedules, and a task list in one place.',
-        long: 'Alarms with repeat patterns, event schedules with reminders, and tasks with due dates, all managed from one place.',
+        long: 'Alarms with repeat patterns and tones from your own songs, event schedules with reminders, and tasks with subtasks, priorities, and due dates, all managed from one place.',
       },
       {
         title: 'News',
@@ -113,8 +114,8 @@ export default {
       },
       {
         title: 'Weather',
-        short: 'Hourly and multi-day forecasts based on your device location.',
-        long: 'Hourly and multi-day forecasts based on your device location, shown alongside the agenda for that day.',
+        short: '24-hour and multi-day forecasts based on your device location.',
+        long: 'A scrollable 24-hour forecast and multi-day outlook based on your device location, shown alongside the agenda for that day.',
       },
       {
         title: 'Calendar',
@@ -241,7 +242,7 @@ export default {
       eyebrow: 'The Difference',
       title: 'Notes that know what your day looks like',
       body: 'One note can link a task in Agenda, an expense in Finance, and a target in Habits. Open the note and its context opens with it.',
-      widgets: 'Home screen widgets are available for Notes, Finance, Agenda, and Habits.',
+      widgets: 'Five home screen widgets are available, for Notes, Finance, Agenda, Habits, and Weather.',
     },
     privacy: {
       eyebrow: 'Data and Privacy',
@@ -272,7 +273,7 @@ export default {
       eyebrow: 'Availability',
       title: 'For Android, through Google Play',
       soon: 'Morvyn is being prepared for release on Google Play and cannot be downloaded yet. It is Android only and not yet available for iPhone.',
-      live: 'Morvyn is free on Google Play. It is Android only and not yet available for iPhone.',
+      live: 'Morvyn is free on Google Play. It is Android only, runs on phones, tablets, and foldables, and is not yet available for iPhone.',
       websiteNote: 'Details on each menu, the FAQ, and the terms of service are on the official Morvyn site.',
     },
   },
@@ -297,8 +298,9 @@ export default {
     ],
   },
 
-  // The /en/news/ page. Each post lives in `posts`, keyed by its slug from
-  // src/data/posts.js.
+  // The /en/news/ page. Morvyn release notes are generated from
+  // src/data/releases.json using the `auto` templates. A hand-written entry in
+  // `posts`, keyed by its slug from src/data/posts.js, overrides them.
   news: {
     eyebrow: 'News',
     title: 'News from Himiko Lab',
@@ -320,6 +322,22 @@ export default {
       'November',
       'December',
     ],
+    // Templates for generated release notes. {version} and {count} come from
+    // the release data, {areas} from the app section names in the Play text.
+    auto: {
+      eyebrow: 'Release Notes',
+      title: 'Morvyn {version}: release notes',
+      summaryLead: 'Release notes for Morvyn {version}.',
+      overview: 'Release notes for Morvyn {version}, with {count} changes.',
+      overviewAreas: 'Release notes for Morvyn {version}, with {count} changes, including {areas}.',
+      and: 'and',
+      introLead: 'Morvyn {version} is rolling out on Google Play.',
+      introSource: 'The list below is copied from the Morvyn release notes on Google Play.',
+      changesTitle: 'What changed in version {version}',
+      closingTitle: 'More about Morvyn',
+      closing:
+        'Details on each Morvyn menu are on its official site, and the app is available on Google Play.',
+    },
     posts: {
       // Only the changes that are actually in version 1.3.1.
       // The Google Play release date is left out because it is not known.
