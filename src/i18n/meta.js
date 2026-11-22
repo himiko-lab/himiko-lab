@@ -1,4 +1,6 @@
 import { PAGES } from '../routes';
+import { POSTS } from '../data/posts';
+import { parseReleaseNotes } from '../data/releaseNotes';
 
 /*
  * Judul, deskripsi, dan nama halaman untuk jejak halaman.
@@ -8,10 +10,60 @@ import { PAGES } from '../routes';
  * supaya <title>, jejak halaman, dan isi tulisan tidak pernah berbeda.
  */
 
+const fill = (template, values) =>
+  template.replace(/\{(\w+)\}/g, (_, key) => values[key] ?? `{${key}}`);
+
+const withPeriod = (text) => (/[.!?]$/.test(text) ? text : `${text}.`);
+
+/** "A, B, dan C" atau "A, B, and C". */
+function joinList(items, and) {
+  if (items.length <= 1) return items.join('');
+  return `${items.slice(0, -1).join(', ')}${items.length > 2 ? ',' : ''} ${and} ${items.at(-1)}`;
+}
+
+/**
+ * Tulisan catatan rilis yang dibuat dari teks "Yang baru" di Google Play,
+ * memakai templat `news.auto` di kamus. Daftar perubahannya disalin apa
+ * adanya dari Play, termasuk sapaan "kamu" di teks bahasa Indonesia.
+ */
+function autoPost(t, release) {
+  const a = t.news.auto;
+  const lang = t.lang.current.toLowerCase();
+  const { headline, changes } = parseReleaseNotes(release.notes[lang] ?? '');
+  const values = { version: release.version, count: changes.length };
+
+  const areas = [...new Set(changes.map((change) => change.area).filter(Boolean))];
+  const overview = areas.length
+    ? fill(a.overviewAreas, { ...values, areas: joinList(areas.slice(0, 3), a.and) })
+    : fill(a.overview, values);
+
+  return {
+    eyebrow: a.eyebrow,
+    title: fill(a.title, values),
+    summary: headline ? `${fill(a.summaryLead, values)} ${withPeriod(headline)}` : overview,
+    intro: `${headline ? withPeriod(headline) : fill(a.introLead, values)} ${a.introSource}`,
+    changesTitle: fill(a.changesTitle, values),
+    changes,
+    closingTitle: a.closingTitle,
+    closing: a.closing,
+  };
+}
+
+/**
+ * Isi satu tulisan Kabar. Untuk catatan rilis, isi otomatis dari Play
+ * ditimpa oleh apa pun yang ditulis tangan di `news.posts[slug]`, sehingga
+ * cukup menulis `title` dan `summary` saja untuk mengganti judulnya.
+ */
+export function postContent(t, slug) {
+  const release = POSTS.find((entry) => entry.slug === slug)?.release;
+  const manual = t.news.posts[slug];
+  return { slug, ...(release ? autoPost(t, release) : {}), ...manual };
+}
+
 /** Isi tulisan bila halaman ini tulisan Kabar, selain itu `null`. */
 export function postFor(t, page) {
   const slug = PAGES[page]?.post;
-  return slug ? { slug, ...t.news.posts[slug] } : null;
+  return slug ? postContent(t, slug) : null;
 }
 
 export function pageMeta(t, page) {

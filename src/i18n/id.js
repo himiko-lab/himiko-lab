@@ -77,7 +77,8 @@ export default {
   },
 
   // Data produk, dipakai bersama oleh beranda dan halaman /morvyn/.
-  // Sumber: morvyn.himikolab.my.id dan kebijakan privasinya (dicek 2026-10-14).
+  // Sumber: morvyn.himikolab.my.id dan kebijakan privasinya (dicek 2026-11-22,
+  // Morvyn 1.7.0).
   morvyn: {
     name: 'Morvyn',
     eyebrow: 'Produk Kami',
@@ -90,17 +91,17 @@ export default {
       {
         title: 'Catatan',
         short: 'Teks, daftar centang, gambar, coretan tangan, dan lampiran PDF dalam satu catatan.',
-        long: 'Tulis catatan biasa, daftar poin, atau daftar centang. Catatan bisa memuat gambar, coretan tangan, rumus matematika, dan lampiran PDF, dan dokumen bisa dipindai menjadi PDF.',
+        long: 'Tulis catatan biasa, daftar poin, atau daftar centang. Catatan bisa memuat gambar, coretan tangan, rumus matematika, dan lampiran PDF, dan dokumen bisa dipindai menjadi PDF. Catatan juga bisa dikunci dengan kunci layar ponsel.',
       },
       {
         title: 'Keuangan',
         short: 'Catat pemasukan dan pengeluaran di beberapa dompet, lalu lihat polanya lewat grafik.',
-        long: 'Catat pemasukan dan pengeluaran di beberapa dompet, pindahkan saldo di antaranya, lihat polanya lewat grafik, dan periksa nilai tukar mata uang.',
+        long: 'Catat pemasukan dan pengeluaran di beberapa dompet, pindahkan saldo di antaranya, lihat polanya lewat grafik, dan periksa nilai tukar mata uang. Utang & Piutang mencatat cicilan beserta pengingat jatuh temponya.',
       },
       {
         title: 'Agenda',
         short: 'Alarm, jadwal acara, dan daftar tugas dalam satu daftar.',
-        long: 'Alarm dengan pola pengulangan, jadwal acara beserta pengingatnya, dan daftar tugas dengan tenggat, semuanya diatur dari satu tempat.',
+        long: 'Alarm dengan pola pengulangan dan nada dari lagu milik Anda sendiri, jadwal acara beserta pengingatnya, dan tugas dengan sub-tugas, prioritas, dan tenggat, semuanya diatur dari satu tempat.',
       },
       {
         title: 'Berita',
@@ -114,8 +115,8 @@ export default {
       },
       {
         title: 'Cuaca',
-        short: 'Prakiraan per jam dan beberapa hari ke depan berdasarkan lokasi perangkat.',
-        long: 'Prakiraan per jam dan beberapa hari ke depan berdasarkan lokasi perangkat Anda, tampil berdampingan dengan agenda hari itu.',
+        short: 'Prakiraan 24 jam dan beberapa hari ke depan berdasarkan lokasi perangkat.',
+        long: 'Prakiraan 24 jam yang bisa digeser dan beberapa hari ke depan berdasarkan lokasi perangkat Anda, tampil berdampingan dengan agenda hari itu.',
       },
       {
         title: 'Kalender',
@@ -244,7 +245,7 @@ export default {
       title: 'Catatan yang tahu isi hari Anda',
       body: 'Satu catatan bisa menautkan tugas di Agenda, pengeluaran di Keuangan, dan target di Kebiasaan. Saat catatan dibuka, konteksnya ikut terbuka.',
       widgets:
-        'Widget layar utama tersedia untuk Catatan, Keuangan, Agenda, dan Kebiasaan.',
+        'Lima widget layar utama tersedia untuk Catatan, Keuangan, Agenda, Kebiasaan, dan Cuaca.',
     },
     privacy: {
       eyebrow: 'Data dan Privasi',
@@ -275,7 +276,7 @@ export default {
       eyebrow: 'Ketersediaan',
       title: 'Untuk Android, lewat Google Play',
       soon: 'Morvyn sedang disiapkan untuk rilis di Google Play dan belum bisa diunduh. Aplikasi ini khusus Android dan belum tersedia untuk iPhone.',
-      live: 'Morvyn tersedia gratis di Google Play. Aplikasi ini khusus Android dan belum tersedia untuk iPhone.',
+      live: 'Morvyn tersedia gratis di Google Play. Aplikasi ini khusus Android, bisa dipakai di ponsel, tablet, dan ponsel lipat, dan belum tersedia untuk iPhone.',
       websiteNote: 'Penjelasan tiap menu, tanya jawab, dan ketentuan layanan ada di situs resmi Morvyn.',
     },
   },
@@ -300,8 +301,9 @@ export default {
     ],
   },
 
-  // Halaman /kabar/. Isi tiap tulisan ada di `posts`, dengan slug dari
-  // src/data/posts.js sebagai kuncinya.
+  // Halaman /kabar/. Catatan rilis Morvyn dibuat otomatis dari
+  // src/data/releases.json memakai templat `auto`. Tulisan tangan di `posts`,
+  // dengan slug dari src/data/posts.js sebagai kuncinya, menimpa isi otomatis.
   news: {
     eyebrow: 'Kabar',
     title: 'Kabar dari Himiko Lab',
@@ -323,6 +325,22 @@ export default {
       'November',
       'Desember',
     ],
+    // Templat catatan rilis otomatis. {version} dan {count} diisi dari data
+    // rilis, {areas} dari nama bagian aplikasi di teks Play.
+    auto: {
+      eyebrow: 'Catatan Rilis',
+      title: 'Morvyn {version}: catatan rilis',
+      summaryLead: 'Catatan rilis Morvyn {version}.',
+      overview: 'Catatan rilis Morvyn {version}, berisi {count} perubahan.',
+      overviewAreas: 'Catatan rilis Morvyn {version}, berisi {count} perubahan, antara lain di {areas}.',
+      and: 'dan',
+      introLead: 'Morvyn {version} mulai tersedia di Google Play.',
+      introSource: 'Daftar di bawah ini disalin dari catatan rilis Morvyn di Google Play.',
+      changesTitle: 'Yang berubah di versi {version}',
+      closingTitle: 'Selengkapnya tentang Morvyn',
+      closing:
+        'Penjelasan tiap menu Morvyn ada di situs resminya, dan aplikasinya tersedia di Google Play.',
+    },
     posts: {
       // Isi tulisan ini hanya perubahan yang memang ada di versi 1.3.1.
       // Tanggal rilis di Google Play tidak dicantumkan karena tidak diketahui.

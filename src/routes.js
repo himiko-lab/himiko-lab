@@ -10,7 +10,8 @@
  * halaman sebelum terjemahannya benar-benar ada, sebab hreflang ikut dari sini.
  *
  * Tulisan di halaman Kabar tidak ditulis satu per satu di sini: entrinya
- * dibuat dari src/data/posts.js dan ditandai dengan `post` (slug tulisannya).
+ * dibuat dari src/data/posts.js (yang sebagian besar berasal dari
+ * src/data/releases.json) dan ditandai dengan `post` (slug tulisannya).
  */
 import { POSTS } from './data/posts';
 
@@ -20,12 +21,12 @@ export const DEFAULT_LANG = 'id';
 export const PAGES = {
   home: {
     paths: { id: '/', en: '/en/' },
-    lastmod: '2026-11-17',
+    lastmod: '2026-11-22',
     priority: { id: '1.0', en: '0.9' },
   },
   morvyn: {
     paths: { id: '/morvyn/', en: '/en/morvyn/' },
-    lastmod: '2026-11-17',
+    lastmod: '2026-11-22',
     priority: { id: '0.8', en: '0.7' },
   },
   about: {
@@ -35,7 +36,12 @@ export const PAGES = {
   },
   news: {
     paths: { id: '/kabar/', en: '/en/news/' },
-    lastmod: '2026-11-17',
+    // Daftar Kabar ikut berubah setiap ada tulisan baru, termasuk catatan
+    // rilis yang ditambahkan otomatis dari Google Play.
+    lastmod: [
+      '2026-11-17',
+      ...POSTS.map((post) => post.lastmod),
+    ].reduce((a, b) => (b > a ? b : a)),
     priority: { id: '0.6', en: '0.5' },
   },
   contact: {
